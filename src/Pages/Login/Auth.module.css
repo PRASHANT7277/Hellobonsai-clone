@@ -1,0 +1,26 @@
+.boldte:hover {
+    text-decoration: underline;
+  }
+  .boldte {
+    font-weight: 500;
+  }
+  .signuppage {
+    height: 300px;
+    background-size: cover;
+    background-image: url("https://app.hellobonsai.com/assets/signup/signup-panel-bg-d7dcdb0bac806bc05a740e6bd59c62439a7102882f57320e8ab25b40393f1b75.png");
+  }
+  .google {
+    width: 284px;
+    font-weight: bold !important;
+    font-size: 15px !important;
+    color: rgb(22, 21, 21) !important;
+    justify-content: center;
+  }
+  .signingoogle1 {
+    color: rgb(19, 18, 18) !important;
+    justify-content: center;
+    text-align: center !important;
+    width: 370px;
+    font-size: 15px !important;   
+  }
+  
