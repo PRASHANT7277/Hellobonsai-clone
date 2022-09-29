@@ -1,0 +1,17 @@
+.first1 {
+  left: 400px;
+
+  width: 90vw;
+  height: 80vw;
+  position: absolute;
+  top: -600px;
+  bottom: auto;
+
+  z-index: -1;
+  display: block;
+
+  border-radius: 6.6vw;
+  background-color: #f2faff;
+
+  transform: rotate(-23deg);
+}

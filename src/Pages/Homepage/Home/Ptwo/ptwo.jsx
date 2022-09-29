@@ -1,4 +1,5 @@
 import { Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import wbonsai from '../../../../Assests/wbonsai.png'
 import React from "react";
 
 const Ptwo = () => {
@@ -87,9 +88,7 @@ const Ptwo = () => {
             base: "335px",
             sm: "423px",
           }}
-          src={
-            "https://assets-global.website-files.com/58868bcd2ef4daaf0f072900/5e5fd7c602ca7c6c51feb665_ill_before_2n%20block.svg"
-          }
+          src={wbonsai}
         />
       </GridItem>
     </Grid>
