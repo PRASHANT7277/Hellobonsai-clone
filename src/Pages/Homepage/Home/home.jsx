@@ -192,7 +192,7 @@ const Home = () => {
           </Heading>
         </Box>
         <Spacer />
-        <Link to="/">
+        <Link to="/sign-up">
           <Button
             bg={"#00b289"}
             p={4}

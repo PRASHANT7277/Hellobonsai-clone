@@ -14,8 +14,16 @@ import logo from '../../../Assests/logo.jpeg'
 const Navbar = () => {
   return (
     <>
-      <Box w="75%" m="auto" mt="5px"  >
-        <Flex>
+      <Box
+        w={{ sm: "95%", md: "100%", lg: "75%" }}
+        m="auto"
+        mt="5px"
+        top="0"
+        position="sticky"
+        zIndex="2000"
+        bgColor={"whiteAlpha.500"}
+      >
+        <Flex flexWrap={"wrap"}>
           <Box>
             <Link to="/">
               <Image w="150px" mt="10px" src={logo} alt=".." />
@@ -73,15 +81,15 @@ const Navbar = () => {
           </Box>
 
           <Box p="3">
-            <Link to="/sign Up">
-              <Button colorScheme="teal" color={"white"} size="md">
+            <Link to="/sign-up">
+              <Button bg="#06B48B" color={"white"} size="md">
                 START FREE
               </Button>
             </Link>
           </Box>
         </Flex>
       </Box>
-      <hr/>
+      <hr />
     </>
   );
 }
