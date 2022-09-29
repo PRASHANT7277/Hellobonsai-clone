@@ -1,0 +1,27 @@
+li:nth-child(odd) {
+  border-radius: 50%;
+  border: 1px solid #50b289;
+  color: #50b289;
+  list-style: none;
+  text-align: center;
+  height: 28px;
+  width: 28px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+li:nth-child(even) {
+  border-left: 1px solid #50b289;
+  list-style: none;
+  height: 20px;
+  margin-left: 50%;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+}
+#steps {
+  background-image: url(https://app.hellobonsai.com/assets/dashboard/step2-bg-d13aa936e296e852246ccc8644f2161e1e177ccae201a48f2974911cbd444e19.png);
+}

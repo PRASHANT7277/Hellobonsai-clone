@@ -96,7 +96,7 @@ const Vendor = () => {
           {/*................................... Routes  for different Componants ..................... */}
           <VendorRoutes />
           {/*...................................Footer..................... */}
-          <Stack color="#aaa">
+          <Stack color="#aaa" mt={5}>
             <Flex
               fontSize="11px"
               fontWeight="600"

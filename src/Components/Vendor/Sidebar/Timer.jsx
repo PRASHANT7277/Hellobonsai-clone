@@ -117,7 +117,7 @@ const Timer = () => {
                 </Button>
               </Box>
             </Stack>
-            <Box p={8}>
+            <Stack p={8} fontSize="13px" color="#aaa">
               <Stack>
                 <Text>PROJECT</Text>
                 <Select variant="outline" placeholder="Select">
@@ -133,7 +133,7 @@ const Timer = () => {
                   <option>hello</option>
                 </Select>
               </Stack>
-              <Flex align="center">
+              <Flex align="center" gap={5}>
                 <Box>
                   <Text>DATE</Text>
                   <Input type="date" />
@@ -143,8 +143,13 @@ const Timer = () => {
                   <Input type="number" placeholder="50.00" />
                 </Box>
               </Flex>
-              <Input type="text" placeholder="What are you working on?" />
-            </Box>
+              <Input
+                type="text"
+                placeholder="What are you working on?"
+                fontSize="12px"
+                h="100px"
+              />
+            </Stack>
           </ModalBody>
         </ModalContent>
       </Modal>
