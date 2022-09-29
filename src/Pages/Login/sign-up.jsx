@@ -17,7 +17,7 @@ import {
   import styles from "./Auth.module.css";
   import { Footer } from "./footer";
   
-  export const Sign = () => {
+  export const SignUp = () => {
   
     
   
