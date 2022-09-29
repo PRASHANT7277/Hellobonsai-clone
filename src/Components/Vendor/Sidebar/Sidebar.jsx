@@ -27,7 +27,7 @@ import { MdOutlineHomeRepairService } from "react-icons/md";
 import { GoCreditCard } from "react-icons/go";
 import { TbReceipt2, TbReceiptTax } from "react-icons/tb";
 import styles from "./Sidebar.module.css";
-import { Link as ReachLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <SimpleGrid
@@ -55,7 +55,14 @@ const Sidebar = () => {
       </Flex>
       <Stack color="#7c7777" justify="space-between">
         <SimpleGrid gap={2}>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor/dashboard"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+            // isActive={{ fontWeight: "bold" }}
+            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
+            // activeClassName="active"
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <AiOutlineHome fontSize="18px" fontWeight="300" />
               <Text>Dashboard</Text>
@@ -64,7 +71,8 @@ const Sidebar = () => {
           <Link
             to="/vendor/clients"
             _hover={{ textdecoration: "none" }}
-            as={ReachLink}
+            as={RouterLink}
+            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
           >
             <Flex align="center" gap={3} fontSize="14px">
               <Box>
@@ -76,7 +84,8 @@ const Sidebar = () => {
           <Link
             to="/vendor/projects"
             _hover={{ textdecoration: "none" }}
-            as={ReachLink}
+            as={RouterLink}
+            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
           >
             <Flex align="center" gap={3} fontSize="14px">
               <HiOutlineFolderOpen fontSize="18px" fontWeight="300" />
@@ -85,19 +94,31 @@ const Sidebar = () => {
           </Link>
         </SimpleGrid>
         <SimpleGrid gap={2}>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <HiOutlineNewspaper fontSize="18px" fontWeight="300" />
               <Text>Proposals</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <BsFileText fontSize="18px" fontWeight="300" />
               <Text>Contracts</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <TbFileDollar fontSize="18px" fontWeight="300" />
               <Text>Invoices</Text>
@@ -105,26 +126,42 @@ const Sidebar = () => {
           </Link>
         </SimpleGrid>
         <SimpleGrid gap={2}>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <HiOutlineClock fontSize="18px" fontWeight="300" />
               <Text>Time Tracking</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <BiTask fontSize="18px" fontWeight="300" />
               <Text>Tasks</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <FaWpforms fontSize="18px" fontWeight="300" />
               <Text>Forms</Text>
             </Flex>
           </Link>
 
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <MdOutlineHomeRepairService fontSize="18px" fontWeight="300" />
               <Text>Services</Text>
@@ -132,19 +169,31 @@ const Sidebar = () => {
           </Link>
         </SimpleGrid>
         <SimpleGrid gap={2}>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <GoCreditCard fontSize="18px" fontWeight="300" />
               <Text>Cash</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <TbReceipt2 fontSize="18px" fontWeight="300" />
               <Text>Accounting</Text>
             </Flex>
           </Link>
-          <Link to="/vendor" _hover={{ textdecoration: "none" }} as={ReachLink}>
+          <Link
+            to="/vendor"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+          >
             <Flex align="center" gap={3} fontSize="14px">
               <TbReceiptTax fontSize="18px" fontWeight="300" />
               <Text>Taxes</Text>

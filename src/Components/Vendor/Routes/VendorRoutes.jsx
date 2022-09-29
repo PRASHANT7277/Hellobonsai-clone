@@ -12,10 +12,13 @@ const VendorRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+
+     
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/clients" element={<Clients />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/projects/:id" element={<IndividualProject />} />
+
 
     </Routes>
   );
