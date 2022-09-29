@@ -18,7 +18,6 @@ import {
 const Footer = () => {
   return (
     <Box
-    
       color="#595568"
       p="10px 10px"
       cursor="pointer"
@@ -34,8 +33,9 @@ const Footer = () => {
           PRODUCT
         </Text>
         <br />
-        {footProduct.map((e,i) => (
-          <Text key={i}
+        {footProduct.map((e, i) => (
+          <Text
+            key={i}
             _hover={{ color: "black.500", textDecoration: "underline" }}
             fontWeight="300"
             fontSize="16px"
@@ -55,8 +55,9 @@ const Footer = () => {
             FREE RESOURCES
           </Text>
           <br />
-          {footFreeResources1.map((e,i) => (
-            <Text key={i}
+          {footFreeResources1.map((e, i) => (
+            <Text
+              key={i}
               _hover={{ color: "black.500", textDecoration: "underline" }}
               fontWeight="300"
               fontSize="16px"
@@ -66,8 +67,9 @@ const Footer = () => {
             </Text>
           ))}
           <br />
-          {footFreeResources2.map((e,i) => (
-            <Text key={i}
+          {footFreeResources2.map((e, i) => (
+            <Text
+              key={i}
               _hover={{ color: "black.500", textDecoration: "underline" }}
               fontWeight="300"
               fontSize="16px"
@@ -86,7 +88,7 @@ const Footer = () => {
           </Text>
           <br />
           <Accordion allowMultiple>
-            {footTemplates.map((e,i) => (
+            {footTemplates.map((e, i) => (
               <AccordionItem key={i}>
                 <h2>
                   <AccordionButton _hover={{ background: "white" }}>
@@ -95,8 +97,9 @@ const Footer = () => {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel>
-                  {e.someElse.map((k,i) => (
-                    <Text key={i}
+                  {e.someElse.map((k, i) => (
+                    <Text
+                      key={i}
                       _hover={{
                         color: "black.500",
                         textDecoration: "underline",
@@ -117,14 +120,15 @@ const Footer = () => {
       </Box>
       {/* BONSAI Box */}
 
-      <Box  p="10px 10px"w={{ lg: "20%" }}>
+      <Box p="10px 10px" w={{ lg: "20%" }}>
         <Text fontSize="17px" lineHeight="24px" fontWeight="600">
           BONSAI
         </Text>
         <br />
 
-        {footBonsai.map((e,i) => (
-          <Text key={i}
+        {footBonsai.map((e, i) => (
+          <Text
+            key={i}
             _hover={{ color: "black.500", textDecoration: "underline" }}
             fontWeight="300"
             fontSize="16px"
