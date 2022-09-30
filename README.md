@@ -16,11 +16,11 @@ In this project we used following tech stacks:-
 
 ### Connect with authors
 
-- [Prashant Kumar](),
-- [Prashant Giri](),
-- [Urvashi Sohaliya](),
-- [Aniket Anil Rasal](),
-- [Madhusudan Prajapat]()
+- [Prashant Kumar](https://github.com/PRASHANT7277),
+- [Prashant Giri](https://github.com/pg570),
+- [Urvashi Sohaliya](https://github.com/UrvashiSohaliya2511),
+- [Aniket Anil Rasal](https://github.com/aniketrasal),
+- [Madhusudan Prajapat](https://github.com/Madhusudan0906)
 
 ### Feedback
 
