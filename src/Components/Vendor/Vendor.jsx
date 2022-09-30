@@ -13,6 +13,16 @@ import {
   ListItem,
   Link,
   Image,
+  Divider,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
 } from "@chakra-ui/react";
 import { MdOutlineSearch } from "react-icons/md";
 import { FaChessQueen, FaPlay } from "react-icons/fa";
@@ -20,6 +30,7 @@ import { ImMobile } from "react-icons/im";
 import { CgLaptop } from "react-icons/cg";
 import Timer from "./Sidebar/Timer";
 const Vendor = () => {
+  const [showMenu, setShowMenu] = React.useState(false);
   return (
     <Stack w="100%">
       {/* ........Top Bar........ */}
@@ -80,16 +91,80 @@ const Vendor = () => {
               </Button>
 
               <Timer />
-              <Button
-                bg="#502ca7"
-                _hover={{ bg: "#502ca7" }}
-                color="white"
-                size="sm"
-                fontSize="18px"
-                fontWeight="500"
-              >
-                U
-              </Button>
+              <Popover>
+                {" "}
+                <PopoverTrigger>
+                  <Button
+                    bg="#502ca7"
+                    _hover={{ bg: "#502ca7" }}
+                    color="white"
+                    size="sm"
+                    fontSize="18px"
+                    fontWeight="500"
+                    onClick={() => setShowMenu(!showMenu)}
+                  >
+                    U
+                  </Button>
+                </PopoverTrigger>
+                {/* <Portal> */}
+                <PopoverContent w="100%">
+                  {" "}
+                  <PopoverBody>
+                    <Stack
+                      // border="1px solid #d5d6d6"
+                      fontSize="13px"
+                      // p={3}
+                      // position="fixed"
+                      // top="10%"
+                      // right="2%"
+                      bg="white"
+                      fontWeight="bold"
+                      color="#7c7777"
+                      // visibility={showMenu ? "visible" : "hidden"}
+                    >
+                      <PopoverArrow />
+                      {/* <Box
+                        className="arrow"
+                        h="16px"
+                        w="16px"
+                        mt="-20px"
+                        transform="rotate(138deg)"
+                        ml="85%"
+                        borderBottom="1px solid #d5d6d6"
+                        borderLeft="1px solid #d5d6d6"
+                        bg="white"
+                      ></Box> */}
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Get Bonsai Free
+                      </Text>
+                      <Divider />
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Help Center
+                      </Text>
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        What's New
+                      </Text>
+                      <Divider />
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        My Subscription
+                      </Text>
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Apps & Integration
+                      </Text>
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Payments
+                      </Text>
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Settings
+                      </Text>
+                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                        Logout
+                      </Text>
+                    </Stack>
+                  </PopoverBody>
+                </PopoverContent>
+                {/* </Portal> */}
+              </Popover>
             </Flex>
           </Flex>
 
