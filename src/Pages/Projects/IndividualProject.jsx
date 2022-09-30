@@ -13,7 +13,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaCodeBranch, FaUser } from "react-icons/fa";
-import { useParams } from "react-router-dom";
 import dbData from "./db.json";
 import Overview from "./Tabs/Overview";
 import Invoices from "./Tabs/Invoices";
@@ -22,7 +21,7 @@ import TimeTracking from "./Tabs/TimeTracking";
 import Settings from "./Tabs/Settings";
 
 function IndividualProject() {
-  const { id } = useParams();
+  // const { id } = useParams();
   const [individual, setIndividual] = useState({});
 
   useEffect(() => {
@@ -60,7 +59,7 @@ function IndividualProject() {
 
         <TabPanels>
           <TabPanel>
-            <Overview />
+            <Overview title={individual.title}/>
           </TabPanel>
           <TabPanel>
             <Invoices />
@@ -72,7 +71,7 @@ function IndividualProject() {
             <Collaborators />
           </TabPanel>
           <TabPanel>
-            <Settings />
+            <Settings title={individual.title}/>
           </TabPanel>
         </TabPanels>
       </Tabs>
