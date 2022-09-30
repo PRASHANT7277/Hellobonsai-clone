@@ -1,11 +1,11 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-export const Footer = () => {
+export const FooterLogin = () => {
   return (
     <Box w="70%" m="auto">
         <ul style={{display: "flex", gap:"25px",justifyContent:"center", fontSize:"14px",color:"#999999"}}>
-        Contact Us  
+            <li>Contact Us </li> 
             <li >Help Center</li>
             <li>About Us</li>
             <li> Plans & Pricing</li>
