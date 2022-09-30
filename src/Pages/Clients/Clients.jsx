@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom/dist';
 import styles from "./Clients.module.css";
-import { IconButton,Button, Table, Tr, Th,Td } from '@chakra-ui/react';
-
-const SearchIcon = ()=>{
-    return (<img width="22px" src="/images/search.png" alt="search"/>)
-}
+import { Table, Tr, Th,Td} from '@chakra-ui/react';
+import { Clientportal } from './Clientportal';
+import { Newclient } from './Newclient';
+import { SearchI } from './SearchI';
+import { Filtersp } from './Filtersp';
 
 const Clients = () => {
-
+    
+    
   return (
     <>
-    <div >
+    <div className={styles.main}>
         <div className={styles.freeTrial}>
             <div style={{marginLeft:"10px"}}>
                 <img src="/images/info.png" alt="info" width="22px" />
@@ -23,13 +24,12 @@ const Clients = () => {
         </div>
         <div className={styles.optionbar}>
             <div style={{display:"flex"}}>
-            {/* <IconButton aria-label='Search database' colorScheme='white' variant='solid' className={styles.searchi} icon={<SearchIcon />} /><Button colorScheme='white' variant='solid' className={styles.filtersp} >Filters</Button> */}
-            <div className={styles.searchi}><SearchIcon /></div><div className={styles.filtersp}>Filter  v</div>
+            <SearchI /><Filtersp />
             </div>
             <div className={styles.optionbar1}>
-                <div style={{color:"green",marginTop:"5px",fontWeight:"600",fontSize:"14px"}}>import CSV</div>
-                <div className={styles.cportal}> Client Portal </div>
-                <div className={styles.nclient}> New Client </div>
+                <div style={{color:"green",marginTop:"5px",fontWeight:"600",fontSize:"14px"}}>import CSV</div>     
+                <Clientportal />
+                <Newclient />
             </div>
         </div>
         <div style={{width:"90%",margin:"auto",marginTop:"20px"}}>
@@ -42,7 +42,7 @@ const Clients = () => {
                     <Th> </Th>
                 </Tr>
                 <Tr style={{fontSize:"14px",border:"1px solid white",backgroundColor:"white",padding:"10px"}}>
-                    <Td><img src="client" alt="client" width="40px" height="40px" style={{border:"1px solid"}}/>Sample Client</Td>
+                    <Td><img src="client" alt="c" width="40px" height="40px" style={{border:"1px solid"}}/>Sample Client</Td>
                     <Td>Sample Client</Td>
                     <Td>sampleclient@hellobonsai.com</Td>
                     <Td> - </Td>
@@ -50,6 +50,7 @@ const Clients = () => {
                 </Tr>
             </Table>
         </div>
+
     </div>
     </>
   )
