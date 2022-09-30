@@ -32,7 +32,7 @@ export const Login = () => {
       })
       .then(res=> {
         console.log(res.data);
-        navigate("/dashboard");
+        navigate("/vendor/dashboard");
       })
   }
 
