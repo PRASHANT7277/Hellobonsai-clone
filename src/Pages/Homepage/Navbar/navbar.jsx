@@ -33,24 +33,64 @@ const Navbar = () => {
 
           <Box p="2">
             <div class="dropdown">
-              <button class="dropbtn">Product </button>
+              <button class="dropbtn">Product ⌵</button>
               <div class="dropdown-content">
-                <Link to="/">AAAAAAAa</Link>
-                <Link to="/">BBBBBBB</Link>
-                <Link to="/">CCCCCCCC</Link>
+                <Link to="/">
+                  <Text fontSize={"22px"}>Bonsai Workflow</Text>
+                  <Text mt="15px" color="grey">
+                    Look professional, win more clients and manage your business
+                    from one place
+                  </Text>
+                  <Box mt="40px">
+                    <hr />
+                  </Box>
+                </Link>
+                <Link to="/">
+                  <Text fontSize={"22px"}>Bonsai Tax</Text>
+                  <Text mt="15px" color="grey">
+                    Track expenses,maximize tax write-off,and estimate tax
+                    without headche
+                  </Text>
+                  <Box mt="40px">
+                    <hr />
+                  </Box>
+                </Link>
+                <Link to="/">
+                  <Text fontSize={"22px"}>Bonsai cash</Text>
+                  <Text mt="15px" color="grey">
+                    Bonsai's all in one financial hub: No fees and lighting fast
+                    payouts
+                  </Text>
+                  <Box mt="40px"></Box>
+                </Link>
               </div>
             </div>
           </Box>
           <Box p="2">
             <div class="dropdown">
-              <button class="dropbtn">Templates </button>
+              <button class="dropbtn">Templates ⌵</button>
               <div class="dropdown-content">
-                <Link to="/">AAAAAAAa</Link>
-                <Link to="/">BBBBBBB</Link>
-                <Link to="/">CCCCCCCC</Link>
-                <Link to="/">AAAAAAAa</Link>
-                <Link to="/">BBBBBBB</Link>
-                <Link to="/">CCCCCCCC</Link>
+                <Link to="/">
+                  <Text>☲ Contract Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">☲ Proposal Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">☲ Invoice Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">☲ Agreements Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">☲ Quote Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">🕗 Scope of works Templates</Text>
+                </Link>
+                <Link to="/">
+                  <Text mt="8px">☲ Brief Templates</Text>
+                </Link>
               </div>
             </div>
           </Box>
@@ -72,7 +112,7 @@ const Navbar = () => {
           <Box p="3">
             <Button
               colorScheme="white"
-              color={"teal"}
+              color="#06B48B"
               size="md"
               border={"1px solid teal"}
             >

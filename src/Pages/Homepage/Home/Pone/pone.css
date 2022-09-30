@@ -1,4 +1,4 @@
-.first{
+.first2 {
     
     left: 400px;
    
@@ -16,4 +16,14 @@
     background-color: #f2faff;
     
     transform: rotate(-23deg);
+}
+@media screen and (max-width: 913px) {
+ .first2{ right: 0px;
+ width: 0vw;
+  height: 0vw;
+  position: absolute;
+  top: 0px;
+  
+ }
+
 }

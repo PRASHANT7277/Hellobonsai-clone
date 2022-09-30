@@ -5,6 +5,8 @@ import { Login } from "../Pages/Login/login";
 import { SignUp } from "../Pages/Login/sign-up";
 import Vendor from "./Vendor/Vendor";
 import Pricing from "../Pages/Price/Pricing"
+import Reviews from "../Pages/Reviews/Reviews"
+
 const AllRoutes = () => {
   return (
     <Routes>
@@ -13,7 +15,7 @@ const AllRoutes = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/pricing" element={<Pricing />} />
-     
+      <Route path="/reviews" element={<Reviews />} />
     </Routes>
   );
 };
