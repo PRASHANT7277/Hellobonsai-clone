@@ -1,5 +1,5 @@
 # Backend
-Hi, our backend part is deployed from different repositorie, If any one interested in that please visit https://github.com/Madhusudan0906/hellobonsaibackend .
+Hi,this is our backend part and is deployed on heroku.
 
 ### Features
 
