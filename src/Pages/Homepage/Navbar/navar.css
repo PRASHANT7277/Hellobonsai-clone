@@ -1,5 +1,5 @@
 .dropbtn {
-  background-color: white;
+  background-color: #F2FAFF;
   color: black;
   padding: 16px;
   font-size: 17px;
@@ -15,8 +15,8 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: 360px;
+  background-color:white;
+  min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }

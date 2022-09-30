@@ -15,7 +15,7 @@ import './pone.css'
 const  Pone= () => {
   return (
     <Box>
-      <Box className="first"></Box>
+      <Box className="first2"></Box>
       <Grid
         w={{
           sm: "700px",

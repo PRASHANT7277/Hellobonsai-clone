@@ -100,6 +100,7 @@ const Home = () => {
             lg: "40%",
           }}
           m={"auto"}
+          textAlign={"centre"}
         >
           Trusted by 500K+ self-employed workers and small businesses
         </Heading>
@@ -115,10 +116,11 @@ const Home = () => {
           color={"#4c525a"}
           fontWeight={300}
           w={{
-            sm: "50%",
+            sm: "60%",
             lg: "40%",
           }}
           m={"auto"}
+          textAlign={"center"}
         >
           Whether you’re just getting started or your business is booming,
           Bonsai has you covered.
@@ -150,7 +152,7 @@ const Home = () => {
         <Box
           w={{
             sm: "70%",
-            base: "90%",
+            lg: "50%",
           }}
         >
           <Heading
@@ -202,7 +204,7 @@ const Home = () => {
             mt={{ base: "20px" }}
             mr={{ sm: "20px" }}
           >
-            GO TO DASHBOARD
+           START FREE
           </Button>
         </Link>
       </Flex>
