@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Stack,
@@ -14,7 +14,11 @@ import {
 import { FiAlertCircle } from "react-icons/fi";
 import { GiPauseButton } from "react-icons/gi";
 import "./Dashboard.module.css";
+import ProjectTimeline from "./ProjectTimeline";
+import IncomeExp from "./IncomeExp";
+import Tasks from "./Task";
 const Dashboard = () => {
+  const [showdetail, setshowdetail] = useState(true);
   const weekday = [
     "Sunday",
     "Monday",
@@ -59,7 +63,7 @@ const Dashboard = () => {
       ? "Good morning"
       : hrs > 12 && hrs < 17
       ? "Good afternoon"
-      : "Good Evening";
+      : "Good evening";
   let name = "abc";
   return (
     <div>
@@ -108,7 +112,11 @@ const Dashboard = () => {
                 </Text>
               </Box>
             </Flex>
-            <Flex align="center" gap={5}>
+            <Flex
+              align="center"
+              gap={5}
+              visibility={!showdetail ? "visible" : "hidden"}
+            >
               <Text fontSize="14px" color="#6d6d6d">
                 Let's get you set up with Bonsai.
               </Text>
@@ -120,13 +128,18 @@ const Dashboard = () => {
                 p={4}
                 borderRadius="3px"
                 _hover={{ bg: "none" }}
+                onClick={() => setshowdetail(true)}
               >
                 {`Get Started >`}
               </Button>
             </Flex>
           </Flex>
         </Box>
-        <Flex border="1px solid #d5d6d6" borderRadius="5px">
+        <Flex
+          border="1px solid #d5d6d6"
+          borderRadius="5px"
+          display={showdetail ? "flex" : "none"}
+        >
           <Box w="35%" borderRight="1px solid #d5d6d6" p={7} pb={10}>
             <Flex>
               <Box>
@@ -218,11 +231,64 @@ const Dashboard = () => {
               fontSize="15px"
               color="#aaa"
               _hover={{ color: "#50b289", cursor: "pointer" }}
+              onClick={() => setshowdetail(false)}
             >
               Hide
             </Text>
           </Flex>
-          {/*  */}
+        </Flex>
+        <Flex gap={12}>
+          <Stack w="80%" spacing={9}>
+            <ProjectTimeline />
+            <Tasks />
+            <IncomeExp />
+          </Stack>
+          <Stack>
+            <Stack fontSize="13px" fontWeight="bold" color="#292a2d">
+              <Flex
+                align="center"
+                gap={4}
+                p={2}
+                border="1px solid #d5d6d6"
+                borderRadius="3px"
+              >
+                <Image
+                  src="https://app.hellobonsai.com/assets/getting_started/onboarding-action-proposals@2x-ed592bf1486af20351f25fbadd7d3acd88906933562cb6dea9ed5d204207f7dd.png"
+                  alt="draft"
+                  w="13%"
+                />
+                <Text>Draft a proposals</Text>
+              </Flex>
+              <Flex
+                align="center"
+                gap={4}
+                p={2}
+                border="1px solid #d5d6d6"
+                borderRadius="3px"
+              >
+                <Image
+                  src="https://app.hellobonsai.com/assets/getting_started/onboarding-action-contracts-73ad171597d2eb387ff77e01a6b375fd33bda9ff5618712825ea39058eda2210.png"
+                  alt="proposals"
+                  w="13%"
+                />
+                <Text>Create a contract</Text>
+              </Flex>
+              <Flex
+                align="center"
+                gap={4}
+                p={2}
+                border="1px solid #d5d6d6"
+                borderRadius="3px"
+              >
+                <Image
+                  src="https://app.hellobonsai.com/assets/getting_started/onboarding-action-invoicing-edd01e1b61c356a46cbdc5165e8213bffadc20151208d2029456cb492a3d8764.png"
+                  alt="invoicing"
+                  w="13%"
+                />
+                <Text>Send an Invoice</Text>
+              </Flex>
+            </Stack>
+          </Stack>
         </Flex>
       </Stack>
     </div>
