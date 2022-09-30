@@ -612,26 +612,28 @@ export const SignUp = () => {
             >
               Already have an account
             </Text>
-            <Box w="80%" m="0px auto">
-              {/* <Link to="/login"> */}
+            <Link href='/login'>
+            <Box  w="80%" m="0px auto">
+              
                 <Button
                   variant="outline"
                   w="100%"
                   colorScheme="green"
                   borderRadius={0}
                 >
-                <Link href='/login' isExternal>
+                {/* <Link  isExternal> */}
               Login
-                </Link>
+                {/* </Link> */}
                 </Button>
-              {/* </Link> */}
             </Box>
+            </Link>
             
             <br />
           </Box>
         </SimpleGrid>
       </Box>
       <FooterLogin/>
+
     </>
   );
 };
