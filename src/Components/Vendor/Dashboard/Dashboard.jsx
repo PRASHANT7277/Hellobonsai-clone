@@ -86,7 +86,9 @@ const Dashboard = () => {
               </Text>
               <Flex fontSize="12px">
                 <Text>You currently don’t have an active subscription.</Text>
-                <Link>Start Your Free Trial now!</Link>
+                <Link color="#3a88c2" textDecoration="underline">
+                  Start Your Free Trial now!
+                </Link>
               </Flex>
             </Box>
           </Flex>

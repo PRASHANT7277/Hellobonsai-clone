@@ -137,9 +137,10 @@ const Sidebar = () => {
             </Flex>
           </Link>
           <Link
-            to="/vendor"
+            to="/vendor/tasks"
             _hover={{ textdecoration: "none" }}
             as={RouterLink}
+            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
           >
             <Flex align="center" gap={3} fontSize="14px">
               <BiTask fontSize="18px" fontWeight="300" />
