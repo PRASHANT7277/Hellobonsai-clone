@@ -15,7 +15,7 @@ function Collaborators() {
             Collaborators
           </Text>
           <Button variant="outline" backgroundColor="#00b289">
-            <Text fontSize="xs" color="white">
+            <Text fontSize="xs" color="black">
               Add Collaborator
             </Text>
           </Button>

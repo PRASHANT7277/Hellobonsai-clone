@@ -1,4 +1,3 @@
-
 import {
   Box,
   Button,
@@ -27,9 +26,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import {
   FaChevronDown,
+  FaEllipsisH,
   FaFolder,
   FaInfoCircle,
   FaSearch,
@@ -39,8 +40,13 @@ import countryData from "./db.json";
 
 function Projects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [country, setCountry] = useState(countryData.Country);
+  const [country, setCountry] = useState([]);
   const [project, setProject] = useState(countryData.Projects);
+
+  useEffect(()=>{
+    setCountry(countryData.Country)
+    setProject(countryData.Projects)
+  },[])
 
   return (
     <div style={{ marginTop: "30px" }}>
@@ -193,7 +199,20 @@ function Projects() {
                   <Td>{el.start}</Td>
                   <Td color="grey">₹0.00</Td>
                   <Td color="grey">₹0.00</Td>
-                  <Td></Td>
+                  <Td>
+                    <Menu>
+                      <MenuButton as={Button} bg="white">
+                        <FaEllipsisH color="grey" />
+                      </MenuButton>
+                      <MenuList>
+                        <Link to={`/vendor/projects/${el.id}`}>
+                          <MenuItem>View Project</MenuItem>
+                        </Link>
+                        <MenuItem>Mark Completed</MenuItem>
+                        <MenuItem>Delete Project</MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
@@ -205,5 +224,3 @@ function Projects() {
 }
 
 export default Projects;
-
-
