@@ -14,6 +14,7 @@ import {
   Spacer,
   Switch,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import React from "react";
 import styles from "./Pricing.module.css";
@@ -23,15 +24,16 @@ import Card from "./Card";
 import Cards2 from "./Cards2";
 import Navbar from "../Homepage/Navbar/navbar.jsx";
 import  Footer  from "../Homepage/Footer/Footer.jsx";
+import Hamburgur from "../Homepage/Navbar/homeburger";
 const Pricing = () => {
   const [ym, setym] = useState(false);
-
+  const [ismobileScreen] = useMediaQuery(`(max-width: 480px)`);
   const handleym = (e) => {
     setym(e.target.checked);
   };
   return (
     <>
-    <Box><Navbar/></Box>
+      <Box>{ismobileScreen ? <Hamburgur /> : <Navbar />}</Box>
       <div className={styles.bg_shape}>
         {/* plans and pricing top */}
         <Box p="10px 10px" w={{ lg: "60%", sm: "110%" }} margin="auto" mt="10%">
@@ -244,7 +246,9 @@ const Pricing = () => {
           </Box>
         </Box>
       </div>
-      <Box><Footer/></Box>
+      <Box>
+        <Footer />
+      </Box>
     </>
   );
 };

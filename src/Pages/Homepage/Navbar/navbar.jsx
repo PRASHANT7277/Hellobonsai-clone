@@ -1,7 +1,7 @@
 import './navar.css'
 import React from 'react'
 import { Link } from 'react-router-dom';
-import {AiOutlineDown} from 'react-icons/ai'
+
 import {
   Box,
   Image,
@@ -131,7 +131,7 @@ const Navbar = () => {
           </Box>
         </Flex>
       </Box>
-      <hr />
+      <hr top="0" position="sticky" zIndex="2000" />
     </>
   );
 }
