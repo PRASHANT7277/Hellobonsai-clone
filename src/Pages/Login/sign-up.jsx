@@ -12,16 +12,22 @@ import {
   Text,
   Link,
   VStack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+
   
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BsEyeFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import styles from "./Auth.module.css";
 import { FooterLogin } from "./footerlogin";
 import Axios from "axios";
 
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   const url = "https://hellobonsaibackend.herokuapp.com/users/signUp";
   const [data, setData] = useState({
     email: "",
@@ -44,7 +50,14 @@ export const SignUp = () => {
       })
       .then(res=> {
         console.log(res.data);
+        alert("SignUp Sucessful!")
+        navigate("/login");
       })
+      .catch((err)=>{
+        console.log(err)
+        alert("User already exist!")
+      }
+      )
   }
 
   function handleData(e){

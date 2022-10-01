@@ -32,8 +32,16 @@ export const Login = () => {
       })
       .then(res=> {
         console.log(res.data);
+        alert("Login Sucessful!")
         navigate("/vendor/dashboard");
       })
+      .catch((err)=>{
+        console.log(err)
+        alert("Invalid Credential")
+      }
+        
+      )
+      
   }
 
   function handleData(e){
