@@ -1,0 +1,45 @@
+.main{
+    min-height: 800px;
+}
+.topbar{
+    min-height:100px;
+    top:-8px;
+    position: relative;
+    background-color: rgb(248, 248, 248);
+    border-bottom: 1px solid rgb(214, 214, 214);
+}
+.infotab{
+    min-width: 85%;
+    max-width: 90%;
+    min-height:100px;
+    margin:auto;
+    top:-70px;
+    position: relative;
+    border-radius: 5px;
+    border: 1px solid rgb(214, 214, 214);
+    background-color: white;
+}
+.infotabpart1{
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+.infotabpart1 .tp1{
+    border: 1px solid gray;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+    margin: auto;
+    font-size: 14px;
+    color: gray;
+
+}
+.infotabpart1 .tp2{
+    padding-top: 20px;
+}
+.infotabpart1 .tp3{
+    padding-top:20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
