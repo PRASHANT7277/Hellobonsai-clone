@@ -33,6 +33,7 @@ export const Login = () => {
       .then(res=> {
         console.log(res.data);
         alert("Login Sucessful!")
+        localStorage.setItem("token",res.data.token)
         navigate("/vendor/dashboard");
       })
       .catch((err)=>{
