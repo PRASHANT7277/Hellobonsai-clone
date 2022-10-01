@@ -20,6 +20,7 @@ import React from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { RiAddFill } from "react-icons/ri";
 import { Form } from "react-router-dom";
+import { postTask } from "../../Redux/TaskReducer.jsx/Task.action";
 const Tasks = () => {
   return (
     <Stack border="1px solid #d5d6d6" borderRadius="5px" fontSize="14px">
@@ -44,7 +45,28 @@ const Tasks = () => {
 };
 
 function AddtaskModal() {
+  const token = localStorage.getItem("token") || [];
+  let id = token.split(":");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let obj = {
+    clientId: id[0],
+    title: "",
+    project: "",
+    client: "",
+    duedate: "",
+    time: "",
+    status: "",
+    description: "",
+  };
+  const handleChange = (e) => {
+    obj[e.target.name] = e.target.value;
+  };
+
+  const handleAdd = () => {
+    postTask(obj);
+    onClose();
+  };
   return (
     <>
       <Button
@@ -84,6 +106,8 @@ function AddtaskModal() {
                     fontWeight: "normal",
                     fontSize: "15px",
                   }}
+                  onChange={handleChange}
+                  name="title"
                 />
               </Box>
               <Box>
@@ -95,6 +119,8 @@ function AddtaskModal() {
                     fontWeight: "normal",
                     fontSize: "15px",
                   }}
+                  onChange={handleChange}
+                  name="description"
                 />
               </Box>
               <Flex justify="space-between" align="center" gap={5}>
@@ -107,6 +133,8 @@ function AddtaskModal() {
                       fontWeight: "normal",
                       fontSize: "15px",
                     }}
+                    onChange={handleChange}
+                    name="project"
                   >
                     <option>newone</option>
                   </Select>
@@ -121,6 +149,8 @@ function AddtaskModal() {
                       fontWeight: "normal",
                       fontSize: "15px",
                     }}
+                    name="duedate"
+                    onChange={handleChange}
                   />
                 </Box>
               </Flex>
@@ -133,6 +163,7 @@ function AddtaskModal() {
                 bg="#50b289"
                 color="white"
                 _hover={{ backgroundColor: "#50b289" }}
+                onClick={handleAdd}
               >
                 Save Task
               </Button>
