@@ -68,7 +68,7 @@ function Settings({ title }) {
     <Box border="1px solid #bfc0c4" p={[10]} borderRadius="10px">
           <Text fontWeight={500}>Reminder Settings</Text>
           <Flex gap={2} mt={10} alignItems="center">
-             <input type="checkbox" checked />
+             <input type="checkbox" />
              <Box>
               <Text as="b">Send my clients auto-reminders.</Text>
               <Text fontSize="xs" color="grey">For outstanding invoices, expiring proposals and contract awaiting signature.</Text>

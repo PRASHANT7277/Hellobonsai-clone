@@ -19,27 +19,47 @@ import Invoices from "./Tabs/Invoices";
 import Collaborators from "./Tabs/Collaborators";
 import TimeTracking from "./Tabs/TimeTracking";
 import Settings from "./Tabs/Settings";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function IndividualProject() {
-  // const { id } = useParams();
+  const { id } = useParams();
   const [individual, setIndividual] = useState({});
+  const [client, setClient] = useState({});
+  const [clientId, setClientId] = useState("");
+
+  async function handleGetProject(id) {
+    await axios
+      .get(`https://hellobonsaibackend.herokuapp.com/projects/${id}`)
+      .then((res) => {
+        setIndividual(res.data);
+        setClientId(res.data.clientId);
+      });
+    // .then((res)=> console.log(res.data))
+  }
+
+  async function handleGetClient(id) {
+    await axios
+      .get(`https://hellobonsaibackend.herokuapp.com/clients/${id}`)
+      .then((res) => setClient(res.data));
+    // .then((res)=> console.log(res.data.name))
+  }
+  handleGetClient(clientId);
 
   useEffect(() => {
-    setIndividual(dbData.Projects[0]);
+    handleGetProject(id);
   }, []);
-
-  // console.log(individual)
 
   return (
     <Box w={["95%"]} m="auto" p={[10]}>
       {/* <Heading textAlign="center">IndividualProject ID : {id}</Heading> */}
       <Box p={5}>
-        <Heading fontWeight={500}>{individual.title}</Heading>
+        <Heading fontWeight={500}>{individual.name}</Heading>
 
         <Flex gap={5} mt={[3]}>
           <Text display="flex" alignItems="center" gap={2} color="grey">
             <FaUser />
-            {individual.client}
+            {client.name}
           </Text>
           <Text display="flex" alignItems="center" gap={2} color="grey">
             <FaCodeBranch />
@@ -59,7 +79,7 @@ function IndividualProject() {
 
         <TabPanels>
           <TabPanel>
-            <Overview title={individual.title}/>
+            <Overview title={individual.name} />
           </TabPanel>
           <TabPanel>
             <Invoices />
@@ -71,7 +91,7 @@ function IndividualProject() {
             <Collaborators />
           </TabPanel>
           <TabPanel>
-            <Settings title={individual.title}/>
+            <Settings title={individual.name} />
           </TabPanel>
         </TabPanels>
       </Tabs>
