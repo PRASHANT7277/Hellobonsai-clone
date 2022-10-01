@@ -11,7 +11,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Select,
@@ -43,10 +42,34 @@ function Projects() {
   const [country, setCountry] = useState([]);
   const [project, setProject] = useState(countryData.Projects);
 
+  let arr= new Date().toDateString()
+  let dateArr =arr.trim().split(" ")
+  let [day, month,date, year] = dateArr;
+  let str= `${date}-${month}-${year}`
+  const [data , setData] = useState({
+    "clientId" : "",
+    "name" : "",
+    "currency" : "",
+    "startDate": `${str}`,
+    "status" : false
+  })
+
+  function handleAddProject(e){
+      e.preventDefault()
+      
+  }
+
+  function handleData(e){
+      const newData = {...data}
+      newData[e.target.id] = e.target.value
+      setData(newData)
+  }
+
   useEffect(()=>{
     setCountry(countryData.Country)
     setProject(countryData.Projects)
   },[])
+  console.log(data);
 
   return (
     <div style={{ marginTop: "30px" }}>
@@ -120,11 +143,12 @@ function Projects() {
               <ModalCloseButton />
               <hr></hr>
               <ModalBody p={10}>
+                <form onSubmit={handleAddProject}>
                 <Text fontWeight={500} color="grey">
                   CLIENT
                 </Text>
 
-                <Select mt={3} color="grey" placeholder="Select option">
+                <Select mt={3} color="grey" placeholder="Select option" id="clientId" value={data.clientId} onChange={handleData}>
                   <option value="Sample Client">Sample Client</option>
                 </Select>
                 <br />
@@ -132,35 +156,31 @@ function Projects() {
                   PROJECT NAME
                 </Text>
 
-                <Input mt={3} placeholder="Homepage Redesign" />
+                <Input mt={3} placeholder="Homepage Redesign" id="name" value={data.name} onChange={handleData}/>
                 <br />
                 <br />
                 <Text fontWeight={500} color="grey">
                   CURRENCY
                 </Text>
 
-                <Select mt={3} w="40%">
+                <Select placeholder="Select" mt={3} w="40%" id="currency" value={data.currency} onChange={handleData}>
                   {country?.map((el) => (
                     <option key={el.name} value={el.name}>
                       {el.name}
                     </option>
                   ))}
                 </Select>
-              </ModalBody>
-              <hr></hr>
-              <ModalFooter>
-                <Button
-                  w={"95%"}
-                  m="auto"
-                  variant="blackAlpha"
-                  bg={"#00b289"}
+                
+                <Input type="submit" bg={"#00b289"}
                   color="white"
-                  onClick={onClose}
                   _hover={{ backgroundColor: "#00CF9F" }}
-                >
-                  Create New Project
-                </Button>
-              </ModalFooter>
+                  mt={5}
+                  value="Create New Project"
+                  onClick={onClose}
+                  />
+                </form>
+              </ModalBody>
+              
             </ModalContent>
           </Modal>
         </Flex>
