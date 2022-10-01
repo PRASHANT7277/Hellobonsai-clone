@@ -38,13 +38,6 @@ const TaskCard = (e) => {
   let id = token.split(":");
   let obj = {
     clientId: id[0],
-    title: "",
-    project: "",
-    client: "",
-    duedate: "",
-    time: "",
-    status: "Active",
-    description: "",
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,8 +46,9 @@ const TaskCard = (e) => {
   };
 
   const handleupdate = () => {
+    console.log({ ...e, ...obj });
     e.handlePatch(e._id, { ...e, ...obj });
-    onClose();
+    // onClose();
   };
 
   return (
