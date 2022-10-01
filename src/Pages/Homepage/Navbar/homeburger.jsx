@@ -238,7 +238,7 @@ const Hamburgur = () => {
                         letterSpacing={"0.9px"}
                         fontFamily={"sans-serif"}
                       >
-                        <Link to="/pricing">
+                        <Link to="/reviews">
                           {" "}
                           <Box flex="1" textAlign="left">
                             Reviews
