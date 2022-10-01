@@ -11,7 +11,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Select,
@@ -37,19 +36,85 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import countryData from "./db.json";
+import axios from "axios";
 
 function Projects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [country, setCountry] = useState([]);
-  const [project, setProject] = useState(countryData.Projects);
+  const [clientData, setClientData] = useState([]);
+  const [project, setProject] = useState([]);
+  const [client, setClient] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-    setCountry(countryData.Country)
-    setProject(countryData.Projects)
-  },[])
+  let arr = new Date().toDateString();
+  let dateArr = arr.trim().split(" ");
+  let [day, month, date, year] = dateArr;
+  let str = `${date}-${month}-${year}`;
+  const [data, setData] = useState({
+    clientId: "",
+    name: "",
+    currency: "",
+    startDate: `${str}`,
+    status: false,
+  });
+
+  async function handleAddProject(e) {
+    e.preventDefault();
+    await axios.post("https://hellobonsaibackend.herokuapp.com/projects", {
+      clientId: data.clientId,
+      name: data.name,
+      currency: data.currency,
+      startDate: data.startDate,
+      status: data.status,
+    });
+    getProjects();
+  }
+
+  async function getClient() {
+    await axios
+      .get("https://hellobonsaibackend.herokuapp.com/clients")
+      .then((res) => setClientData(res.data));
+  }
+  async function getProjects() {
+    setLoading(true);
+    await axios
+      .get("https://hellobonsaibackend.herokuapp.com/projects")
+      .then((res) => {
+        setProject(res.data);
+        setLoading(false);
+      });
+  }
+
+  function handleData(e) {
+    const newData = { ...data };
+    newData[e.target.id] = e.target.value;
+    setData(newData);
+  }
+
+  async function handleDeleteProject(id) {
+    await axios
+      .delete(`https://hellobonsaibackend.herokuapp.com/projects/${id}`)
+      .then(() => getProjects());
+  }
+
+  async function handleGetClient(id) {
+    await axios
+      .get(`https://hellobonsaibackend.herokuapp.com/clients/${id}`)
+      .then((res) => setClient(res.data[0]));
+  }
+
+  
+  useEffect(() => {
+    setCountry(countryData.Country);
+    getProjects();
+    getClient();
+    handleGetClient(data.clientId);
+  }, []);
+
+  console.log(data);
 
   return (
-    <div style={{ marginTop: "30px" }}>
+    <div style={{ marginTop: "30px", marginBottom: "100px" }}>
       <Box
         borderLeft="2px solid #3a88c2"
         w={["90%"]}
@@ -120,47 +185,70 @@ function Projects() {
               <ModalCloseButton />
               <hr></hr>
               <ModalBody p={10}>
-                <Text fontWeight={500} color="grey">
-                  CLIENT
-                </Text>
+                <form onSubmit={handleAddProject}>
+                  <Text fontWeight={500} color="grey">
+                    CLIENT
+                  </Text>
 
-                <Select mt={3} color="grey" placeholder="Select option">
-                  <option value="Sample Client">Sample Client</option>
-                </Select>
-                <br />
-                <Text fontWeight={500} color="grey">
-                  PROJECT NAME
-                </Text>
+                  <Select
+                    mt={3}
+                    color="grey"
+                    placeholder="Select option"
+                    id="clientId"
+                    value={data.clientId}
+                    onChange={handleData}
+                  >
+                    {/* <option value="Sample Client">Sample Client</option> */}
+                    {clientData?.map((el) => (
+                      <option key={el._id} value={el._id}>
+                        {el.name}
+                      </option>
+                    ))}
+                  </Select>
+                  <br />
+                  <Text fontWeight={500} color="grey">
+                    PROJECT NAME
+                  </Text>
 
-                <Input mt={3} placeholder="Homepage Redesign" />
-                <br />
-                <br />
-                <Text fontWeight={500} color="grey">
-                  CURRENCY
-                </Text>
+                  <Input
+                    mt={3}
+                    placeholder="Homepage Redesign"
+                    id="name"
+                    value={data.name}
+                    onChange={handleData}
+                  />
+                  <br />
+                  <br />
+                  <Text fontWeight={500} color="grey">
+                    CURRENCY
+                  </Text>
 
-                <Select mt={3} w="40%">
-                  {country?.map((el) => (
-                    <option key={el.name} value={el.name}>
-                      {el.name}
-                    </option>
-                  ))}
-                </Select>
+                  <Select
+                    placeholder="Select"
+                    mt={3}
+                    w="40%"
+                    id="currency"
+                    value={data.currency}
+                    onChange={handleData}
+                  >
+                    {country?.map((el) => (
+                      <option key={el.name} value={el.name}>
+                        {el.name}
+                      </option>
+                    ))}
+                  </Select>
+
+                  <Input
+                    type="submit"
+                    bg={"#00b289"}
+                    color="white"
+                    _hover={{ backgroundColor: "#00CF9F" }}
+                    mt={5}
+                    value="Create New Project"
+                    onClick={onClose}
+                  />
+                </form>
               </ModalBody>
-              <hr></hr>
-              <ModalFooter>
-                <Button
-                  w={"95%"}
-                  m="auto"
-                  variant="blackAlpha"
-                  bg={"#00b289"}
-                  color="white"
-                  onClick={onClose}
-                  _hover={{ backgroundColor: "#00CF9F" }}
-                >
-                  Create New Project
-                </Button>
-              </ModalFooter>
             </ModalContent>
           </Modal>
         </Flex>
@@ -180,42 +268,53 @@ function Projects() {
               </Tr>
             </Thead>
 
-            <Tbody>
-              {project?.map((el) => (
-                <Tr key={el.id}>
-                  <Link to={`/vendor/projects/${el.id}`}>
-                    <Td
-                      fontWeight={500}
-                      display="flex"
-                      alignItems="center"
-                      gap={2}
-                    >
-                      <FaFolder />
-
-                      <Text>{el.title}</Text>
-                    </Td>
-                  </Link>
-                  <Td color="grey">{el.client}</Td>
-                  <Td>{el.start}</Td>
-                  <Td color="grey">₹0.00</Td>
-                  <Td color="grey">₹0.00</Td>
-                  <Td>
-                    <Menu>
-                      <MenuButton as={Button} bg="white">
-                        <FaEllipsisH color="grey" />
-                      </MenuButton>
-                      <MenuList>
-                        <Link to={`/vendor/projects/${el.id}`}>
-                          <MenuItem>View Project</MenuItem>
-                        </Link>
-                        <MenuItem>Mark Completed</MenuItem>
-                        <MenuItem>Delete Project</MenuItem>
-                      </MenuList>
-                    </Menu>
-                  </Td>
+            {loading ? (
+              <Tbody>
+                <Tr>
+                  <Td></Td>
+                  <Td></Td>
+                  <Td>...loading</Td>
+                  <Td></Td>
+                  <Td></Td>
+                  <Td></Td>
                 </Tr>
-              ))}
-            </Tbody>
+              </Tbody>
+            ) : (
+              <Tbody>
+                {project?.map((el) => (
+                  <Tr key={el._id}>
+                    <Td fontWeight={500}>
+                      <Link to={`/vendor/projects/${el._id}`}>
+                        <Flex alignItems="center" gap={2}>
+                          <FaFolder />
+                          <Text>{el.name}</Text>
+                        </Flex>
+                      </Link>
+                    </Td>
+                    <Td color="grey">{client.name}</Td>
+                    <Td>{el.startDate}</Td>
+                    <Td color="grey">₹0.00</Td>
+                    <Td color="grey">₹0.00</Td>
+                    <Td>
+                      <Menu>
+                        <MenuButton as={Button} bg="white">
+                          <FaEllipsisH color="grey" />
+                        </MenuButton>
+                        <MenuList>
+                          <Link to={`/vendor/projects/${el._id}`}>
+                            <MenuItem>View Project</MenuItem>
+                          </Link>
+                          <MenuItem>Mark Completed</MenuItem>
+                          <MenuItem onClick={() => handleDeleteProject(el._id)}>
+                            Delete Project
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            )}
           </Table>
         </TableContainer>
       </Box>

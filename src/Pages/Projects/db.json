@@ -111,26 +111,5 @@
     {
       "name": "ZMW"
     }
-  ],
-
-  "Projects": [
-    {
-      "title": "petite-swing-7786",
-      "client": "sample client",
-      "start": "28 sept 2022",
-      "id" : 1
-    },
-    {
-      "title": "Project-2",
-      "client": "sample client",
-      "start": "28 sept 2022",
-      "id" : 2
-    },
-    {
-      "title": "Project-3",
-      "client": "sample client",
-      "start": "28 sept 2022",
-      "id" : 3
-    }
   ]
 }
