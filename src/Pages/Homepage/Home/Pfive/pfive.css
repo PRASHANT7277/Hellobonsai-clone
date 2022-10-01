@@ -1,0 +1,27 @@
+.first3 {
+right: 1300px;
+
+  width: 50vw;
+  height: 50vw;
+  position: absolute;
+  top: 2500px;
+  bottom: auto;
+
+  z-index: -1;
+  display: block;
+
+  border-radius: 6.6vw;
+  background-color: #f2faff;
+
+  transform: rotate(-23deg);
+}
+@media screen and (max-width: 913px) {
+ .first3{ right: 0px;
+ width: 0vw;
+  height: 0vw;
+  position: absolute;
+  top: 0px;
+  
+ }
+
+}

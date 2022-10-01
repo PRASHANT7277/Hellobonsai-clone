@@ -1,4 +1,6 @@
-
+.main{
+    min-height: 700px;
+}
 .freeTrial{
     width: 90%;
     margin: auto;
@@ -25,8 +27,10 @@
 .cportal{
     border: 1px solid;
     padding: 5px 10px;
+    cursor: pointer;
 }
 .nclient{
+    cursor: pointer;
     border: 1px solid;
     padding: 5px 10px;
     background-color: green;
@@ -50,4 +54,42 @@
     border-left: 0px;
     width: fit-content;
     padding: 5px 20px 5px 20px;
+}
+.cpmodal{
+    display: flex;
+    min-width: 800px;
+    min-height: 500px;
+    gap:0px
+}
+.cpmodalc1{
+
+    min-width: 500px;
+    min-height: 500px;
+    padding: 40px;
+}
+.cpmodalc2{
+    min-width: 350px;
+    min-height: 500px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+    margin-right: -24px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(0, 190, 95);
+}
+.cpmodalc2>img{
+    margin: 80px 50px;
+    border-radius: 25px;
+}
+.closeB{
+    top:3px;
+    right:-35px;
+    position:absolute;
+}
+.line{
+    margin: auto;
+    margin-top: 10px;
+    width: 95%;
+    border-top: 1px solid;
+    padding: 0px;
 }

@@ -1,8 +1,10 @@
-import { Grid, GridItem, Heading, Image, Spacer, Text } from "@chakra-ui/react";
+import { Grid, GridItem, Heading, Image, Spacer, Text,Box } from "@chakra-ui/react";
 import React from "react";
-
+import './pfour.css'
 const Pfour = () => {
   return (
+    <>
+    <Box className='first1'></Box>
     <Grid
       gridTemplateColumns={{
         base: "repeat(1,1fr)",
@@ -99,6 +101,7 @@ const Pfour = () => {
         </Text>
       </GridItem>
     </Grid>
+    </>
   );
 };
 

@@ -1,0 +1,20 @@
+.bg_shape {
+    position: relative;
+    overflow: hidden;
+    padding: 50px;
+  }
+  
+  .bg_shape:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #f2faff;
+    /* border-radius: 10%; */
+    transform: rotate(45deg);
+    top: 0;
+    right: 0;
+    z-index: -1;
+    top: -60%; /* change value as required */
+    right: -20%; /* change value as required */
+  }

@@ -62,7 +62,8 @@ const Home = () => {
           }}
           fontWeight={{ sm: 300, base: 300 }}
           color={"#4c525a"}
-          w={{ base: "90%", sm: "56%" }}
+          w={{ sm: "56%",lg:"40%" }}
+          textAlign='centre'
         >
           Bonsai integrates and automates every step of your business so it runs
           seamlessly - from proposal to tax season.
@@ -96,9 +97,10 @@ const Home = () => {
           fontWeight={400}
           w={{
             sm: "60%",
-            base: "80%",
+            lg: "40%",
           }}
           m={"auto"}
+          textAlign={"centre"}
         >
           Trusted by 500K+ self-employed workers and small businesses
         </Heading>
@@ -114,10 +116,11 @@ const Home = () => {
           color={"#4c525a"}
           fontWeight={300}
           w={{
-            sm: "50%",
-            base: "80%",
+            sm: "60%",
+            lg: "40%",
           }}
           m={"auto"}
+          textAlign={"center"}
         >
           Whether you’re just getting started or your business is booming,
           Bonsai has you covered.
@@ -149,7 +152,7 @@ const Home = () => {
         <Box
           w={{
             sm: "70%",
-            base: "90%",
+            lg: "50%",
           }}
         >
           <Heading
@@ -192,7 +195,7 @@ const Home = () => {
           </Heading>
         </Box>
         <Spacer />
-        <Link to="/">
+        <Link to="/sign-up">
           <Button
             bg={"#00b289"}
             p={4}
@@ -201,7 +204,7 @@ const Home = () => {
             mt={{ base: "20px" }}
             mr={{ sm: "20px" }}
           >
-            GO TO DASHBOARD
+           START FREE
           </Button>
         </Link>
       </Flex>
