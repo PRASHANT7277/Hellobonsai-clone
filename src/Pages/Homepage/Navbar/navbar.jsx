@@ -110,14 +110,16 @@ const Navbar = () => {
           </Box>
           <Spacer />
           <Box p="3">
-            <Button
-              colorScheme="white"
-              color="#06B48B"
-              size="md"
-              border={"1px solid teal"}
-            >
-              LOG IN
-            </Button>
+            <Link to="/login">
+              <Button
+                colorScheme="white"
+                color="#06B48B"
+                size="md"
+                border={"1px solid teal"}
+              >
+                LOG IN
+              </Button>
+            </Link>
           </Box>
 
           <Box p="3">
