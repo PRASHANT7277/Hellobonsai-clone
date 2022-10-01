@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import VendorRoutes from "./Routes/VendorRoutes";
 import Sidebar from "./Sidebar/Sidebar";
 import {
@@ -24,13 +24,40 @@ import {
   PopoverCloseButton,
   PopoverAnchor,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { MdOutlineSearch } from "react-icons/md";
 import { FaChessQueen, FaPlay } from "react-icons/fa";
 import { ImMobile } from "react-icons/im";
 import { CgLaptop } from "react-icons/cg";
 import Timer from "./Sidebar/Timer";
+import { useNavigate } from "react-router-dom";
 const Vendor = () => {
   const [showMenu, setShowMenu] = React.useState(false);
+  const navigate = useNavigate();
+  let [name, setname] = useState("XYZ");
+  let token = localStorage.getItem("token");
+  let id = token.split(":");
+
+  const userDetail = async () => {
+    axios
+      .get(`https://hellobonsaibackend.herokuapp.com/users/${id[0]}`)
+      .then((res) => {
+        setname(res.data.user.name);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    userDetail();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <Stack w="100%">
       {/* ........Top Bar........ */}
@@ -103,7 +130,7 @@ const Vendor = () => {
                     fontWeight="500"
                     onClick={() => setShowMenu(!showMenu)}
                   >
-                    U
+                    {name[0]}
                   </Button>
                 </PopoverTrigger>
                 {/* <Portal> */}
@@ -111,29 +138,13 @@ const Vendor = () => {
                   {" "}
                   <PopoverBody>
                     <Stack
-                      // border="1px solid #d5d6d6"
                       fontSize="13px"
-                      // p={3}
-                      // position="fixed"
-                      // top="10%"
-                      // right="2%"
                       bg="white"
                       fontWeight="bold"
                       color="#7c7777"
-                      // visibility={showMenu ? "visible" : "hidden"}
                     >
                       <PopoverArrow />
-                      {/* <Box
-                        className="arrow"
-                        h="16px"
-                        w="16px"
-                        mt="-20px"
-                        transform="rotate(138deg)"
-                        ml="85%"
-                        borderBottom="1px solid #d5d6d6"
-                        borderLeft="1px solid #d5d6d6"
-                        bg="white"
-                      ></Box> */}
+
                       <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
                         Get Bonsai Free
                       </Text>
@@ -157,7 +168,11 @@ const Vendor = () => {
                       <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
                         Settings
                       </Text>
-                      <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                      <Text
+                        _hover={{ color: "black", bg: "#ececec" }}
+                        p={1}
+                        onClick={handleLogout}
+                      >
                         Logout
                       </Text>
                     </Stack>
