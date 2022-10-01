@@ -1,13 +1,22 @@
-import { Box, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import React from "react";
 import PerReview from "./PerReview";
 import { reviews } from "./data";
 import Navbar from "../Homepage/Navbar/navbar.jsx";
 import Footer from "../Homepage/Footer/Footer.jsx"
+import Hamburgur from "../Homepage/Navbar/homeburger";
 const Reviews = () => {
+  const [ismobileScreen] = useMediaQuery(`(max-width: 480px)`);
   return (
     <>
-    <Navbar/>
+      {ismobileScreen ? <Hamburgur /> : <Navbar />}
       <Box mb="10%" p="2% 2%" mt="5%">
         {/* Top */}
         <Box w="80%" m="auto" fontWeight="400" textAlign="center">
@@ -37,7 +46,7 @@ const Reviews = () => {
           </Grid>
         </Box>
       </Box>
-      <Footer/>
+      <Footer />
     </>
   );
 };
