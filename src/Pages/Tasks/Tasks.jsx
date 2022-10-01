@@ -10,33 +10,47 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td,
-  TableCaption,
-  TableContainer,
-  Checkbox,
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
+  ModalOverlay,
+  Input,
+  Divider,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { FiAlertCircle } from "react-icons/fi";
+import { TbSubtask } from "react-icons/tb";
+import { FiLink } from "react-icons/fi";
+import { BsArchive, BsFolder2, BsCheckLg } from "react-icons/bs";
+import { RiDeleteBin5Line } from "react-icons/ri";
+
 import TaskCard from "./TaskCard";
+import { getTasksdata } from "../../Components/Redux/TaskReducer.jsx/Task.action";
 const Tasks = () => {
   const [task, settask] = React.useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleAdd = () => {
     let obj = {
+      clientId: "6336e54a27080cd298ae4515",
       title: "",
       project: "",
       client: "",
       duedate: "",
       time: "",
       status: "",
+      discription: "",
     };
     settask([...task, obj]);
   };
   React.useEffect(() => {
-    console.log(task);
-  }, [task]);
+    getTasksdata().then((res) => {
+      settask(res.data);
+    });
+  }, []);
 
   return (
     <Stack p="5%" pt="2%" spacing={8}>
@@ -117,10 +131,115 @@ const Tasks = () => {
             bg="#50b389"
             color="white"
             _hover={{ bg: "#50b389" }}
-            onClick={handleAdd}
+            onClick={onOpen}
           >
             New Task
           </Button>
+          <Modal
+            isCentered
+            onClose={onClose}
+            isOpen={isOpen}
+            motionPreset="slideInBottom"
+            size="lg"
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalBody>
+                <Flex p={5} align="center" justify="space-between">
+                  <Flex align="center" gap={2} color="#aaa">
+                    <Text fontSize="13px">UNFOLLOW</Text>
+                    <TbSubtask fontSize="18px" />
+                    <FiLink fontSize="18px" />
+                    <BsArchive fontSize="18px" />
+                    <RiDeleteBin5Line fontSize="18px" />
+                  </Flex>
+                  <Button
+                    fontSize="12px"
+                    border="1px solid #50b289"
+                    color="#50b289"
+                    bg="none"
+                    _hover={{ border: "1px solid #50b289" }}
+                  >
+                    <Flex align="center" gap={2}>
+                      <BsCheckLg /> <Text>Mark Complete</Text>
+                    </Flex>
+                  </Button>
+                </Flex>
+                <ModalCloseButton />
+                <Divider />
+                <Stack spacing={9} p={3} fontSize="12px">
+                  <Box>
+                    <Input
+                      placeholder={"No Title added"}
+                      _placeholder={{
+                        color: "#aaa",
+                        fontWeight: "bold",
+
+                        fontSize: "18px",
+                      }}
+                      border="none"
+                    />
+                  </Box>
+                  <Box>
+                    <Input
+                      placeholder="Add a description"
+                      _placeholder={{
+                        color: "#aaa",
+                        fontWeight: "normal",
+                        fontSize: "15px",
+                      }}
+                      h="150px"
+                      border="none"
+                    />
+                  </Box>
+                  <Flex justify="space-between" align="center" gap={5}>
+                    <Flex align="center">
+                      <Text color="#a292a2" fontSize="15px">
+                        <BsFolder2 />
+                      </Text>
+                      <Select
+                        _placeholder={{
+                          color: "#aaa",
+                          fontWeight: "normal",
+                          fontSize: "15px",
+                        }}
+                        fontSize="13px"
+                        border="none"
+                      >
+                        <option>PROJECT</option>
+                      </Select>
+                    </Flex>
+                    <Flex>
+                      <Input
+                        placeholder="Due Date"
+                        type="date"
+                        _placeholder={{
+                          color: "#aaa",
+                          fontWeight: "normal",
+                          fontSize: "15px",
+                        }}
+                        fontSize="13px"
+                        border="none"
+                      />
+                    </Flex>
+                  </Flex>
+                </Stack>
+                <Flex justify="space-between" align="center" mt={12} mb={5}>
+                  <Button colorScheme="blue" onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    bg="#50b289"
+                    color="white"
+                    _hover={{ backgroundColor: "#50b289" }}
+                    onClick={handleAdd}
+                  >
+                    Save Task
+                  </Button>
+                </Flex>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
         </Flex>
       </Flex>
       <Box>
@@ -142,19 +261,7 @@ const Tasks = () => {
           <Tbody gap={2}>
             {task &&
               task.map((e) => {
-                return (
-                  // <Tr key={new Date().getSeconds() + Math.random()}>
-                  //   <Td>
-                  //     <Checkbox>{e.title}</Checkbox>
-                  //   </Td>
-                  //   <Td>{e.project ? e.project : "No project"}</Td>
-                  //   <Td>{e.client ? e.client : "--"}</Td>
-                  //   <Td>{e.duedate ? e.duedate : "No due date"}</Td>
-                  //   <Td>{e.time}</Td>
-                  //   <Td>...</Td>
-                  // </Tr>
-                  <TaskCard detail={e} />
-                );
+                return <TaskCard {...e} key={e._id} />;
               })}
           </Tbody>
         </Table>
