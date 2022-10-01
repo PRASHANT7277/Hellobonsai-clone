@@ -20,6 +20,8 @@ import {
   Input,
   Divider,
   ModalCloseButton,
+  useToast,
+  Td,
 } from "@chakra-ui/react";
 import { FiAlertCircle } from "react-icons/fi";
 import { TbSubtask } from "react-icons/tb";
@@ -28,27 +30,104 @@ import { BsArchive, BsFolder2, BsCheckLg } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 import TaskCard from "./TaskCard";
-import { getTasksdata } from "../../Components/Redux/TaskReducer.jsx/Task.action";
+import {
+  getTasksdata,
+  postTask,
+  deleteTask,
+  updateTask,
+} from "../../Components/Redux/TaskReducer.jsx/Task.action";
+
 const Tasks = () => {
+  const toast = useToast();
+
   const [task, settask] = React.useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const token = localStorage.getItem("token") || [];
+  let id = token.split(":");
+
+  let obj = {
+    clientId: id[0],
+    title: "",
+    project: "",
+    client: "",
+    duedate: "",
+    time: "",
+    status: "Active",
+    description: "",
+  };
+
+  const handleChange = (e) => {
+    obj[e.target.name] = e.target.value;
+  };
 
   const handleAdd = () => {
-    let obj = {
-      clientId: "6336e54a27080cd298ae4515",
-      title: "",
-      project: "",
-      client: "",
-      duedate: "",
-      time: "",
-      status: "",
-      discription: "",
-    };
-    settask([...task, obj]);
+    postTask(obj)
+      .then((res) => {
+        getTasksdata().then((res) => {
+          let data = res.data;
+          data = data.filter((e) => e.status === "Active");
+
+          settask(data);
+        });
+        onClose();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const handleDelete = (ele) => {
+    let status = ele.status;
+
+    deleteTask(ele._id).then((res) => {
+      getTasksdata().then((res) => {
+        let data = res.data;
+        data = data.filter((e) => e.status === status);
+        settask(data);
+      });
+      toast({
+        title: "Task Deleted Successfully",
+        variant: "top-accent",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+    });
+  };
+  const handlePatch = (id, data) => {
+    updateTask(id, data).then((res) => {
+      getTasksdata().then((res) => {
+        let data = res.data;
+        data = data.filter((e) => e.status === "Active");
+
+        settask(data);
+        toast({
+          title: `Task Updated Successfully`,
+          variant: "top-accent",
+          status: "success",
+          isClosable: true,
+          position: "bottom-right",
+        });
+      });
+    });
+  };
+
+  const handleStatus = (e) => {
+    let type = e.target.value;
+    getTasksdata().then((res) => {
+      let data = res.data;
+      data = data.filter((e) => e.status === type);
+      settask(data);
+    });
   };
   React.useEffect(() => {
     getTasksdata().then((res) => {
-      settask(res.data);
+      let data = res.data;
+
+      data = data.filter((e) => e.status === "Active");
+
+      settask(data);
     });
   }, []);
 
@@ -84,10 +163,17 @@ const Tasks = () => {
             focusBorderColor="none"
             borderRadius="0px"
             _focus={{ border: "1px solid #48a791" }}
+            onChange={handleStatus}
           >
-            <option style={{ fontSize: "14px" }}>Active</option>
-            <option style={{ fontSize: "14px" }}>Archived</option>
-            <option style={{ fontSize: "14px" }}>Completed</option>
+            <option style={{ fontSize: "14px" }} value="Active">
+              Active
+            </option>
+            <option style={{ fontSize: "14px" }} value="Archived">
+              Archived
+            </option>
+            <option style={{ fontSize: "14px" }} value="Completed">
+              Completed
+            </option>
           </Select>
 
           <Select
@@ -177,6 +263,8 @@ const Tasks = () => {
 
                         fontSize: "18px",
                       }}
+                      onChange={handleChange}
+                      name="title"
                       border="none"
                     />
                   </Box>
@@ -188,6 +276,8 @@ const Tasks = () => {
                         fontWeight: "normal",
                         fontSize: "15px",
                       }}
+                      onChange={handleChange}
+                      name="description"
                       h="150px"
                       border="none"
                     />
@@ -203,6 +293,8 @@ const Tasks = () => {
                           fontWeight: "normal",
                           fontSize: "15px",
                         }}
+                        onChange={handleChange}
+                        name="project"
                         fontSize="13px"
                         border="none"
                       >
@@ -218,6 +310,8 @@ const Tasks = () => {
                           fontWeight: "normal",
                           fontSize: "15px",
                         }}
+                        onChange={handleChange}
+                        name="duedate "
                         fontSize="13px"
                         border="none"
                       />
@@ -243,28 +337,43 @@ const Tasks = () => {
         </Flex>
       </Flex>
       <Box>
-        <Table
-          style={{
-            borderSpacing: "0 1em",
-          }}
-        >
-          <Thead>
-            <Tr border="none">
-              <Th>TASK</Th>
-              <Th>PROJECT</Th>
-              <Th>CLIENT</Th>
-              <Th>DUE DATE</Th>
-              <Th></Th>
-              <Th></Th>
-            </Tr>
-          </Thead>
-          <Tbody gap={2}>
-            {task &&
-              task.map((e) => {
-                return <TaskCard {...e} key={e._id} />;
-              })}
-          </Tbody>
-        </Table>
+        {task.length === 0 && (
+          <Box h="250px" color="gray" textAlign="center" p={10}>
+            <Text>Does Not have Any task</Text>
+          </Box>
+        )}
+        {task.length > 0 && (
+          <Table
+            style={{
+              borderSpacing: "0 1em",
+            }}
+          >
+            <Thead>
+              <Tr border="none">
+                <Th>TASK</Th>
+                <Th>PROJECT</Th>
+                <Th>CLIENT</Th>
+                <Th>DUE DATE</Th>
+                <Th></Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody gap={2}>
+              {task &&
+                task.map((e) => {
+                  return (
+                    <TaskCard
+                      {...e}
+                      handleDelete={handleDelete}
+                      handlePatch={handlePatch}
+                      handleAdd={handleAdd}
+                      key={e._id}
+                    />
+                  );
+                })}
+            </Tbody>
+          </Table>
+        )}
       </Box>
     </Stack>
   );

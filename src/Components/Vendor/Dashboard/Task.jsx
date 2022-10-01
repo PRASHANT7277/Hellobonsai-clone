@@ -56,7 +56,7 @@ function AddtaskModal() {
     client: "",
     duedate: "",
     time: "",
-    status: "",
+    status: "Active",
     description: "",
   };
   const handleChange = (e) => {

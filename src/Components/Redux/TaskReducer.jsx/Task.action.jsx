@@ -23,3 +23,27 @@ export const postTask = async (data) => {
     return e;
   }
 };
+export const deleteTask = async (id) => {
+  console.log(id);
+  try {
+    let res = await axios.delete(
+      `https://hellobonsaibackend.herokuapp.com/tasks/${id}`
+    );
+    return res;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const updateTask = async (id, data) => {
+  console.log(id);
+  try {
+    let res = await axios.patch(
+      `https://hellobonsaibackend.herokuapp.com/tasks/${id}`,
+      data
+    );
+    return res;
+  } catch (e) {
+    return e;
+  }
+};
