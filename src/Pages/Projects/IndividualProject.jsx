@@ -39,7 +39,7 @@ function IndividualProject() {
 
   async function handleGetClient(id) {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/clients/${id}`)
+      .get(`https://hellobonsaibackend.herokuapp.com/clients/c/${id}`)
       .then((res) => setClient(res.data));
     // .then((res)=> console.log(res.data.name))
   }
