@@ -153,6 +153,7 @@ const Home = () => {
           w={{
             sm: "70%",
             lg: "50%",
+            
           }}
         >
           <Heading

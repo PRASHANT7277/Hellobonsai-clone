@@ -1,6 +1,7 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import React from "react";
 import { TiTick } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 const Card = ({ head, headP, rateM, rateY, ym, lists }) => {
   return (
@@ -52,15 +53,17 @@ const Card = ({ head, headP, rateM, rateY, ym, lists }) => {
         </Box>
       ))}
       <br />
-      <Button
-        w="100%"
-        bgColor="#00b289"
-        color="white"
-        p="30px 30px"
-        _hover={{ bgColor: "none" }}
-      >
-        Go to Dashboard
-      </Button>
+      <Link to ="/sign-up">
+        <Button
+          w="100%"
+          bgColor="#00b289"
+          color="white"
+          p="30px 30px"
+          _hover={{ bgColor: "none" }}
+        >
+          START FREE
+        </Button>
+      </Link>
     </Box>
   );
 };
