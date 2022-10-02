@@ -38,6 +38,7 @@ import {
 import { Link } from "react-router-dom";
 import countryData from "./db.json";
 import axios from "axios";
+import GetClientName from "./GetClientName";
 
 function Projects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,13 +47,12 @@ function Projects() {
   const [usersData, setUsersData] = useState("");
   const [project, setProject] = useState([]);
   const [client, setClient] = useState({});
+  const [clientId, setClientId] = useState("");
   const [loading, setLoading] = useState(false);
 
   let arr = new Date().toDateString();
   let dateArr = arr.trim().split(" ");
   let [day, month, date, year] = dateArr;
-  let username = localStorage.getItem("token");
-  let user = username.split(":");
 
   const [data, setData] = useState({
     userId: "",
@@ -65,6 +65,7 @@ function Projects() {
 
   async function handleAddProject(e) {
     e.preventDefault();
+
     await axios.post("https://hellobonsaibackend.herokuapp.com/projects", {
       userId: usersData,
       clientId: data.clientId,
@@ -78,7 +79,7 @@ function Projects() {
 
   async function getClient() {
     await axios
-      .get("https://hellobonsaibackend.herokuapp.com/clients")
+      .get(`https://hellobonsaibackend.herokuapp.com/clients/${usersData}`)
       .then((res) => setClientData(res.data));
   }
 
@@ -97,6 +98,7 @@ function Projects() {
   function handleData(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
+    // console.log(newData);
     setData(newData);
   }
 
@@ -104,12 +106,6 @@ function Projects() {
     await axios
       .delete(`https://hellobonsaibackend.herokuapp.com/projects/${id}`)
       .then(() => getProjects());
-  }
-
-  async function handleGetClient(id) {
-    await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/clients/${id}`)
-      .then((res) => setClient(res.data[0]));
   }
 
   async function toggleStatus(id, status) {
@@ -121,17 +117,21 @@ function Projects() {
     );
     getProjects();
   }
-  
+
   useEffect(() => {
     setCountry(countryData.Country);
-    getClient();
-    handleGetClient(data.clientId);
+    let username = localStorage.getItem("token");
+    let user = username.split(":");
     setUsersData(user[0]);
   }, []);
-  
+
   useEffect(() => {
     getProjects();
   }, [usersData]);
+
+  useEffect(() => {
+    getClient();
+  }, [clientData]);
 
   return (
     <div style={{ marginTop: "30px", marginBottom: "100px" }}>
@@ -316,7 +316,9 @@ function Projects() {
                         </Flex>
                       </Link>
                     </Td>
-                    <Td color="grey">{client.name}</Td>
+                    <Td color="grey">
+                      <GetClientName id={el.clientId} />
+                    </Td>
                     <Td>{el.startDate}</Td>
                     <Td color="grey">₹0.00</Td>
                     <Td color="grey">₹0.00</Td>
