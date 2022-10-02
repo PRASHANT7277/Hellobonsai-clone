@@ -1,11 +1,11 @@
 .first2 {
     
-    left: 380px;
+    left: 285px;
    
     width: 60vw;
-    height: 80vw;
+    height: 120vw;
     position: absolute;
-   top:-600px;
+   top:-1100px;
     bottom: auto;
     
     z-index: -1;
@@ -15,7 +15,7 @@
     border-radius: 6.6vw;
     background-color: #f2faff;
     
-    transform: rotate(-23deg);
+    transform: rotate(-22deg);
 }
 @media screen and (max-width: 913px) {
  .first2{ right: 0px;

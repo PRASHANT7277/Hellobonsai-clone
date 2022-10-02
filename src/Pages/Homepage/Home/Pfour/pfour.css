@@ -1,7 +1,7 @@
 .first1 {
-  /* left: 900px;
+  left: 750px;
 
-  width: 65vw;
+  width: 40vw;
   height: 50vw;
   position: absolute;
   top: 1600px;
@@ -13,7 +13,7 @@
   border-radius: 6.6vw;
   background-color: #FFF5E8;
 
-  transform: rotate(-23deg); */
+  transform: rotate(-23deg);
 }
 @media screen and (max-width: 913px) {
  .first1{ right: 0px;
