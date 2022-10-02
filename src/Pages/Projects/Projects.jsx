@@ -43,6 +43,7 @@ function Projects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [country, setCountry] = useState([]);
   const [clientData, setClientData] = useState([]);
+  const [usersData, setUsersData] = useState("");
   const [project, setProject] = useState([]);
   const [client, setClient] = useState({});
   const [loading, setLoading] = useState(false);
@@ -50,18 +51,22 @@ function Projects() {
   let arr = new Date().toDateString();
   let dateArr = arr.trim().split(" ");
   let [day, month, date, year] = dateArr;
+  let username = localStorage.getItem("token");
+  let user = username.split(":");
 
   const [data, setData] = useState({
+    userId: "",
     clientId: "",
     name: "",
     currency: "",
     status: false,
-    startDate: `${date}-${month}-${year}`
+    startDate: `${date}-${month}-${year}`,
   });
 
   async function handleAddProject(e) {
     e.preventDefault();
     await axios.post("https://hellobonsaibackend.herokuapp.com/projects", {
+      userId: usersData,
       clientId: data.clientId,
       name: data.name,
       currency: data.currency,
@@ -76,10 +81,13 @@ function Projects() {
       .get("https://hellobonsaibackend.herokuapp.com/clients")
       .then((res) => setClientData(res.data));
   }
+
   async function getProjects() {
     setLoading(true);
     await axios
-      .get("https://hellobonsaibackend.herokuapp.com/projects")
+      .get(
+        `https://hellobonsaibackend.herokuapp.com/projects/userId/${usersData}`
+      )
       .then((res) => {
         setProject(res.data);
         setLoading(false);
@@ -113,13 +121,17 @@ function Projects() {
     );
     getProjects();
   }
-
+  
   useEffect(() => {
     setCountry(countryData.Country);
-    getProjects();
     getClient();
     handleGetClient(data.clientId);
+    setUsersData(user[0]);
   }, []);
+  
+  useEffect(() => {
+    getProjects();
+  }, [usersData]);
 
   return (
     <div style={{ marginTop: "30px", marginBottom: "100px" }}>
