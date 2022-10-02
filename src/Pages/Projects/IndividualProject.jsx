@@ -13,7 +13,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaCodeBranch, FaUser } from "react-icons/fa";
-import dbData from "./db.json";
 import Overview from "./Tabs/Overview";
 import Invoices from "./Tabs/Invoices";
 import Collaborators from "./Tabs/Collaborators";
@@ -48,11 +47,10 @@ function IndividualProject() {
 
   useEffect(() => {
     handleGetProject(id);
-  }, []);
+  }, [id]);
 
   return (
     <Box w={["95%"]} m="auto" p={[10]}>
-      {/* <Heading textAlign="center">IndividualProject ID : {id}</Heading> */}
       <Box p={5}>
         <Heading fontWeight={500}>{individual.name}</Heading>
 
