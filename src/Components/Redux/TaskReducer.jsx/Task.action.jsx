@@ -24,7 +24,6 @@ export const postTask = async (data) => {
   }
 };
 export const deleteTask = async (id) => {
-  console.log(id);
   try {
     let res = await axios.delete(
       `https://hellobonsaibackend.herokuapp.com/tasks/${id}`
@@ -36,7 +35,6 @@ export const deleteTask = async (id) => {
 };
 
 export const updateTask = async (id, data) => {
-  console.log(id);
   try {
     let res = await axios.patch(
       `https://hellobonsaibackend.herokuapp.com/tasks/${id}`,

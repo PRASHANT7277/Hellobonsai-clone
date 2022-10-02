@@ -294,7 +294,7 @@ const Tasks = () => {
                           fontSize: "15px",
                         }}
                         onChange={handleChange}
-                        name="project"
+                        name="duedate"
                         fontSize="13px"
                         border="none"
                       >
@@ -311,7 +311,7 @@ const Tasks = () => {
                           fontSize: "15px",
                         }}
                         onChange={handleChange}
-                        name="duedate "
+                        name="duedate"
                         fontSize="13px"
                         border="none"
                       />
