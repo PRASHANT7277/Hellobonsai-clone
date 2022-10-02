@@ -10,44 +10,86 @@ import {
   PopoverContent,
   PopoverBody,
   Flex,
-  Divider,
-  Button,
+  Box,
   Modal,
   ModalBody,
   ModalContent,
   useDisclosure,
   ModalOverlay,
-  ModalFooter,
-  Heading,
   Input,
-  Box,
+  Button,
   Select,
+  Divider,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import React from "react";
-import { TbDots, TbSubtask } from "react-icons/tb";
-
+import { FiAlertCircle } from "react-icons/fi";
+import { TbSubtask } from "react-icons/tb";
 import { FiLink } from "react-icons/fi";
 import { BsArchive, BsFolder2, BsCheckLg } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { MdCalendarToday } from "react-icons/md";
+import React from "react";
+import { TbDots, TbCheckbox } from "react-icons/tb";
+import {
+  MdOutlineCheckBoxOutlineBlank,
+  MdOutlineRestorePage,
+} from "react-icons/md";
 const TaskCard = (e) => {
+  const token = localStorage.getItem("token") || [];
+  let id = token.split(":");
+  let obj = {
+    clientId: id[0],
+  };
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleChange = (e) => {
+    obj[e.target.name] = e.target.value;
+  };
+
+  const handleupdate = () => {
+    // console.log({ ...e, ...obj });
+
+    e.handlePatch(e._id, { ...e, ...obj });
+    onClose();
+  };
 
   return (
     <Tr
-      key={new Date().getSeconds() + Math.random()}
+      key={e._id}
       border="1px solid #e2f3ff"
       borderRadius="5px"
       fontSize="13px"
-      onClick={onOpen}
     >
-      <Td w="30%">
-        <Checkbox>{e.title}</Checkbox>
+      <Td w="30%" onClick={onOpen}>
+        <Flex align="center" gap={3}>
+          <Box
+            color="#aaa"
+            _hover={{ color: "gray" }}
+            fontSize="16px"
+            // onClick={handleStatus}
+          >
+            {e.status === "Completed" ? (
+              <TbCheckbox />
+            ) : e.status === "Archived" ? (
+              <MdOutlineRestorePage fontSize="17px" />
+            ) : (
+              <MdOutlineCheckBoxOutlineBlank />
+            )}
+          </Box>
+          <Text> {e.title}</Text>
+        </Flex>
+        {/* <Checkbox
+          isChecked={e.status === "Completed" ? true : false}
+          onChange={handlecompleted}
+          colorScheme={e.status === "Completed" ? true : false}
+        >
+         
+        </Checkbox> */}
       </Td>
       <Td>{e.project ? e.project : "No project"}</Td>
       <Td>{e.client ? e.client : "--"}</Td>
-      <Td>{e.duedate ? e.duedate : "No due date"}</Td>
+      <Td color={e.status === "Completed" ? "#e47d7c" : "gray"}>
+        {e.duedate.length > 0 ? e.duedate : "No due date"}
+      </Td>
       <Td>{e.time}</Td>
       <Td>
         <Popover>
@@ -77,15 +119,47 @@ const TaskCard = (e) => {
                 color="#7c7777"
               >
                 <PopoverArrow />
+                {(e.status === "Active" || e.status === "Archived") && (
+                  <Text
+                    _hover={{ color: "black", bg: "#ececec" }}
+                    p={1}
+                    onClick={() =>
+                      e.handlePatch(e._id, { ...e, status: "Completed" })
+                    }
+                  >
+                    Mark Complete
+                  </Text>
+                )}
+                {(e.status === "Completed" || e.status === "Archived") && (
+                  <Text
+                    _hover={{ color: "black", bg: "#ececec" }}
+                    p={1}
+                    onClick={() =>
+                      e.handlePatch(e._id, { ...e, status: "Active" })
+                    }
+                  >
+                    Mark Incomplete
+                  </Text>
+                )}
+                {e.status !== "Archived" && (
+                  <Text
+                    _hover={{ color: "black", bg: "#ececec" }}
+                    p={1}
+                    onClick={() =>
+                      e.handlePatch(e._id, { ...e, status: "Archived" })
+                    }
+                  >
+                    Archive Task
+                  </Text>
+                )}
 
-                <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
-                  Mark Complete
-                </Text>
-
-                <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
-                  Archive Task
-                </Text>
-                <Text _hover={{ color: "black", bg: "#ececec" }} p={1}>
+                <Text
+                  _hover={{ color: "black", bg: "#ececec" }}
+                  p={1}
+                  onClick={() => {
+                    e.handleDelete(e);
+                  }}
+                >
                   Delete Task
                 </Text>
               </Stack>
@@ -93,8 +167,6 @@ const TaskCard = (e) => {
           </PopoverContent>
           {/* </Portal> */}
         </Popover>
-
-        {/* ............................Modall ...................................*/}
         <Modal
           isCentered
           onClose={onClose}
@@ -110,8 +182,18 @@ const TaskCard = (e) => {
                   <Text fontSize="13px">UNFOLLOW</Text>
                   <TbSubtask fontSize="18px" />
                   <FiLink fontSize="18px" />
-                  <BsArchive fontSize="18px" />
-                  <RiDeleteBin5Line fontSize="18px" />
+                  <BsArchive
+                    fontSize="18px"
+                    onClick={() =>
+                      e.handlePatch(e._id, { ...e, status: "Archived" })
+                    }
+                  />
+                  <RiDeleteBin5Line
+                    fontSize="18px"
+                    onClick={() => {
+                      e.handleDelete(e);
+                    }}
+                  />
                 </Flex>
                 <Button
                   fontSize="12px"
@@ -119,9 +201,20 @@ const TaskCard = (e) => {
                   color="#50b289"
                   bg="none"
                   _hover={{ border: "1px solid #50b289" }}
+                  onClick={() =>
+                    e.handlePatch(e._id, {
+                      ...e,
+                      status: e.status === "Completed" ? "Active" : "Completed",
+                    })
+                  }
                 >
                   <Flex align="center" gap={2}>
-                    <BsCheckLg /> <Text>Mark Complete</Text>
+                    <BsCheckLg />{" "}
+                    <Text>
+                      {e.status === "Active"
+                        ? "Mark Complete"
+                        : "Mark Incomplete"}
+                    </Text>
                   </Flex>
                 </Button>
               </Flex>
@@ -130,24 +223,30 @@ const TaskCard = (e) => {
               <Stack spacing={9} p={3} fontSize="12px">
                 <Box>
                   <Input
-                    placeholder={e.title ? e.title : "No Title added"}
+                    placeholder={e.title ? e.title : "Add Title"}
                     _placeholder={{
                       color: "#aaa",
                       fontWeight: "bold",
 
                       fontSize: "18px",
                     }}
+                    onChange={handleChange}
+                    name="title"
                     border="none"
                   />
                 </Box>
                 <Box>
                   <Input
-                    placeholder="Add a description"
+                    placeholder={
+                      e.description ? e.description : "Add Description"
+                    }
                     _placeholder={{
                       color: "#aaa",
                       fontWeight: "normal",
                       fontSize: "15px",
                     }}
+                    onChange={handleChange}
+                    name="description"
                     h="150px"
                     border="none"
                   />
@@ -163,6 +262,8 @@ const TaskCard = (e) => {
                         fontWeight: "normal",
                         fontSize: "15px",
                       }}
+                      onChange={handleChange}
+                      name="project"
                       fontSize="13px"
                       border="none"
                     >
@@ -178,6 +279,8 @@ const TaskCard = (e) => {
                         fontWeight: "normal",
                         fontSize: "15px",
                       }}
+                      onChange={handleChange}
+                      name="duedate"
                       fontSize="13px"
                       border="none"
                     />
@@ -192,6 +295,7 @@ const TaskCard = (e) => {
                   bg="#50b289"
                   color="white"
                   _hover={{ backgroundColor: "#50b289" }}
+                  onClick={handleupdate}
                 >
                   Save Task
                 </Button>
@@ -199,6 +303,7 @@ const TaskCard = (e) => {
             </ModalBody>
           </ModalContent>
         </Modal>
+        {/* ............................Modall ...................................*/}
       </Td>
     </Tr>
   );

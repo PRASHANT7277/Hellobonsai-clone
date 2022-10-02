@@ -2,17 +2,10 @@ import {
   Stack,
   Box,
   Flex,
-  Button,
   Text,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  ListItem,
   Link,
   Image,
 } from "@chakra-ui/react";
-import { MdOutlineSearch } from "react-icons/md";
-import { FaChessQueen, FaPlay } from "react-icons/fa";
 import { ImMobile } from "react-icons/im";
 import { CgLaptop } from "react-icons/cg";
 // import Timer from ".";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Stack,
@@ -10,7 +10,7 @@ import {
   SimpleGrid,
   Divider,
 } from "@chakra-ui/react";
-
+import axios from "axios";
 import { FiAlertCircle } from "react-icons/fi";
 import { GiPauseButton } from "react-icons/gi";
 import "./Dashboard.module.css";
@@ -18,7 +18,26 @@ import ProjectTimeline from "./ProjectTimeline";
 import IncomeExp from "./IncomeExp";
 import Tasks from "./Task";
 const Dashboard = () => {
+  let [name, setname] = useState("XYZ");
   const [showdetail, setshowdetail] = useState(true);
+  let token = localStorage.getItem("token");
+  let id = token.split(":");
+
+  const userDetail = async () => {
+    axios
+      .get(`https://hellobonsaibackend.herokuapp.com/users/${id[0]}`)
+      .then((res) => {
+        setname(res.data.user.name);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    userDetail();
+  }, []);
+
   const weekday = [
     "Sunday",
     "Monday",
@@ -64,7 +83,7 @@ const Dashboard = () => {
       : hrs > 12 && hrs < 17
       ? "Good afternoon"
       : "Good evening";
-  let name = "abc";
+
   return (
     <div>
       <Stack p="5%" pt="2%" spacing={8}>

@@ -92,6 +92,17 @@ const Sidebar = () => {
               <Text>Projects</Text>
             </Flex>
           </Link>
+          <Link
+            to="/vendor/tasks"
+            _hover={{ textdecoration: "none" }}
+            as={RouterLink}
+            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
+          >
+            <Flex align="center" gap={3} fontSize="14px">
+              <BiTask fontSize="18px" fontWeight="300" />
+              <Text>Tasks</Text>
+            </Flex>
+          </Link>
         </SimpleGrid>
         <SimpleGrid gap={2}>
           <Link
@@ -136,17 +147,7 @@ const Sidebar = () => {
               <Text>Time Tracking</Text>
             </Flex>
           </Link>
-          <Link
-            to="/vendor/tasks"
-            _hover={{ textdecoration: "none" }}
-            as={RouterLink}
-            _activeLink={{ fontWeight: "bold", color: "#292a2d" }}
-          >
-            <Flex align="center" gap={3} fontSize="14px">
-              <BiTask fontSize="18px" fontWeight="300" />
-              <Text>Tasks</Text>
-            </Flex>
-          </Link>
+
           <Link
             to="/vendor"
             _hover={{ textdecoration: "none" }}
