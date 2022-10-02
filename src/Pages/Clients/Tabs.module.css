@@ -1,0 +1,37 @@
+.main{
+    border: 1px solid rgb(214, 214, 214);
+    background-color: white;
+    border-radius: 5px;
+    
+}
+.upim{
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    justify-content: space-between;
+}
+.upop{
+    min-height: 15px;
+    border-bottom: 1px solid;
+    padding: 20px;
+    display: flex;
+    justify-content: end;
+}
+.downop{
+    padding: 15px;
+    display: flex;
+}
+.downop>div{
+    width: 25%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.downop>div:hover{
+    color: gray;
+}
+.downim{
+    padding: 15px;
+}

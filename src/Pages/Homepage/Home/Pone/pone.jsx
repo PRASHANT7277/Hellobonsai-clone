@@ -114,7 +114,7 @@ const  Pone= () => {
         <GridItem area={"image"}>
           <Image
             w={{
-              sm: " 557px",
+              sm: " 557px"
             }}
             src={`https://assets-global.website-files.com/58868bcd2ef4daaf0f072900/60dc499268d597166db997aa_bonsai_hero-opt-2.png`}
           />

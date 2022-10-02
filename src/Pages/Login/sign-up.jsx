@@ -240,7 +240,7 @@ export const SignUp = () => {
                   type="text"
                   id="name"
                   value={data.name}
-                  placeholder="Aniket Rasal"
+                  placeholder="John Smith"
                   borderRadius={0}
                   onChange={(e)=>handleData(e)}
                   // value="John Smith"
