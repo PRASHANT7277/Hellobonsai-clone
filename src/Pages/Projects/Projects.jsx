@@ -14,6 +14,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -49,13 +50,13 @@ function Projects() {
   let arr = new Date().toDateString();
   let dateArr = arr.trim().split(" ");
   let [day, month, date, year] = dateArr;
-  let str = `${date}-${month}-${year}`;
+
   const [data, setData] = useState({
     clientId: "",
     name: "",
     currency: "",
-    startDate: `${str}`,
     status: false,
+    startDate: `${date}-${month}-${year}`
   });
 
   async function handleAddProject(e) {
@@ -103,15 +104,22 @@ function Projects() {
       .then((res) => setClient(res.data[0]));
   }
 
-  
+  async function toggleStatus(id, status) {
+    await axios.patch(
+      `https://hellobonsaibackend.herokuapp.com/projects/${id}`,
+      {
+        status: !status,
+      }
+    );
+    getProjects();
+  }
+
   useEffect(() => {
     setCountry(countryData.Country);
     getProjects();
     getClient();
     handleGetClient(data.clientId);
   }, []);
-
-  console.log(data);
 
   return (
     <div style={{ marginTop: "30px", marginBottom: "100px" }}>
@@ -273,7 +281,12 @@ function Projects() {
                 <Tr>
                   <Td></Td>
                   <Td></Td>
-                  <Td>...loading</Td>
+                  <Td>
+                    <Flex alignItems="center" gap={2}>
+                      ...Loading
+                      <Spinner color="#00b289" size="sm" thickness="3px" />
+                    </Flex>
+                  </Td>
                   <Td></Td>
                   <Td></Td>
                   <Td></Td>
@@ -304,7 +317,13 @@ function Projects() {
                           <Link to={`/vendor/projects/${el._id}`}>
                             <MenuItem>View Project</MenuItem>
                           </Link>
-                          <MenuItem>Mark Completed</MenuItem>
+                          <MenuItem
+                            onClick={() => toggleStatus(el._id, el.status)}
+                          >
+                            {el.status
+                              ? "Mark Uncompleted"
+                              : "Mark as Completed"}
+                          </MenuItem>
                           <MenuItem onClick={() => handleDeleteProject(el._id)}>
                             Delete Project
                           </MenuItem>
