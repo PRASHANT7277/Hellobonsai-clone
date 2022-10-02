@@ -46,9 +46,10 @@ const TaskCard = (e) => {
   };
 
   const handleupdate = () => {
-    console.log({ ...e, ...obj });
+    // console.log({ ...e, ...obj });
+
     e.handlePatch(e._id, { ...e, ...obj });
-    // onClose();
+    onClose();
   };
 
   return (
@@ -87,7 +88,7 @@ const TaskCard = (e) => {
       <Td>{e.project ? e.project : "No project"}</Td>
       <Td>{e.client ? e.client : "--"}</Td>
       <Td color={e.status === "Completed" ? "#e47d7c" : "gray"}>
-        {e.duedate ? e.duedate : "No due date"}
+        {e.duedate.length > 0 ? e.duedate : "No due date"}
       </Td>
       <Td>{e.time}</Td>
       <Td>
@@ -279,7 +280,7 @@ const TaskCard = (e) => {
                         fontSize: "15px",
                       }}
                       onChange={handleChange}
-                      name="duedate "
+                      name="duedate"
                       fontSize="13px"
                       border="none"
                     />
