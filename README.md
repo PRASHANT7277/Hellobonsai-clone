@@ -13,6 +13,7 @@ Hi, everyone we are group of 5 members and we cloned a website hellobonsai in ou
 
 In this project we used following tech stacks:- 
 - [ReactJS](https://reactjs.org/)
+- [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [MongoDb](https://www.mongodb.com/)
 - [Chakra UI](https://chakra-ui.com/)
