@@ -1,9 +1,17 @@
 import { Task_Error, Task_Loading, Task_Success } from "./Task.action.type";
 import axios from "axios";
 
-export const getTasksdata = async () => {
+export const getTasksdata = async (clientId) => {
   try {
-    let res = await axios.get("https://hellobonsaibackend.herokuapp.com/tasks");
+    let res = await axios.get(
+      "https://hellobonsaibackend.herokuapp.com/tasks",
+      {
+        headers: {
+          clientid: clientId.clientId,
+        },
+      }
+    );
+
     return res;
   } catch (e) {
     return e;
@@ -18,7 +26,6 @@ export const postTask = async (data) => {
       data
     );
     return res;
-    console.log(res);
   } catch (e) {
     return e;
   }

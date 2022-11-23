@@ -21,7 +21,7 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import { RiAddFill } from "react-icons/ri";
 import { Form } from "react-router-dom";
 import { postTask } from "../../Redux/TaskReducer.jsx/Task.action";
-const Tasks = () => {
+const Tasks = ({ tasks, projects }) => {
   return (
     <Stack border="1px solid #d5d6d6" borderRadius="5px" fontSize="14px">
       <Flex align="center" justify="space-between">
@@ -32,19 +32,37 @@ const Tasks = () => {
           <AiFillInfoCircle fontSize="16px" color="#e5e5e5" />
         </Flex>
 
-        <AddtaskModal />
+        <AddtaskModal projects={projects} />
       </Flex>
       <Divider />
-      <Stack textAlign="center" h="150px">
-        <Text m="auto" color="#aaa">
-          No Task yet
-        </Text>
+      <Stack textAlign="center" h="150px" p={5}>
+        {!tasks && (
+          <Text m="auto" color="#aaa">
+            No Task yet
+          </Text>
+        )}
+        {tasks && (
+          <>
+            <Flex align="center" justify="space-between" fontWeight="bold">
+              <Text>Title</Text>
+              <Text>Due Date</Text>
+            </Flex>
+            {tasks.map((e) => {
+              return (
+                <Flex align="center" justify="space-between">
+                  <Text>{e.title}</Text>
+                  <Text>{e.duedate ? e.duedate : "--"}</Text>
+                </Flex>
+              );
+            })}{" "}
+          </>
+        )}
       </Stack>
     </Stack>
   );
 };
 
-function AddtaskModal() {
+function AddtaskModal({ projects }) {
   const token = localStorage.getItem("token") || [];
   let id = token.split(":");
 
@@ -136,7 +154,7 @@ function AddtaskModal() {
                     onChange={handleChange}
                     name="project"
                   >
-                    <option>newone</option>
+                    {projects && projects.map((e) => <option>{e.name}</option>)}
                   </Select>
                 </Box>
                 <Box>

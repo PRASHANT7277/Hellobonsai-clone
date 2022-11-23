@@ -22,13 +22,14 @@ import {
   ModalCloseButton,
   useToast,
   Td,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { FiAlertCircle } from "react-icons/fi";
 import { TbSubtask } from "react-icons/tb";
 import { FiLink } from "react-icons/fi";
 import { BsArchive, BsFolder2, BsCheckLg } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
-
+import axios from "axios";
 import TaskCard from "./TaskCard";
 import {
   getTasksdata,
@@ -41,6 +42,7 @@ const Tasks = () => {
   const toast = useToast();
 
   const [task, settask] = React.useState([]);
+  const [project, setProject] = React.useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const token = localStorage.getItem("token") || [];
   let id = token.split(":");
@@ -60,10 +62,19 @@ const Tasks = () => {
     obj[e.target.name] = e.target.value;
   };
 
+  async function getProjects() {
+    await axios
+      .get(`https://hellobonsaibackend.herokuapp.com/projects/userId/${id[0]}`)
+      .then((res) => {
+        setProject(res.data);
+      });
+  }
+
   const handleAdd = () => {
     postTask(obj)
       .then((res) => {
-        getTasksdata().then((res) => {
+        getTasksdata({ clientId: id[0] }).then((res) => {
+          getProjects();
           let data = res.data;
           data = data.filter((e) => e.status === "Active");
 
@@ -80,7 +91,8 @@ const Tasks = () => {
     let status = ele.status;
 
     deleteTask(ele._id).then((res) => {
-      getTasksdata().then((res) => {
+      getTasksdata({ clientId: id[0] }).then((res) => {
+        getProjects();
         let data = res.data;
         data = data.filter((e) => e.status === status);
         settask(data);
@@ -95,44 +107,74 @@ const Tasks = () => {
       });
     });
   };
-  const handlePatch = (id, data) => {
-    updateTask(id, data).then((res) => {
-      getTasksdata().then((res) => {
-        let data = res.data;
-        data = data.filter((e) => e.status === "Active");
+  const handlePatch = (Tid, data) => {
+    updateTask(Tid, data).then((res) => {
+      getTasksdata({ clientId: id[0] })
+        .then((res) => {
+          let data = res.data;
 
-        settask(data);
-        toast({
-          title: `Task Updated Successfully`,
-          variant: "top-accent",
-          status: "success",
-          isClosable: true,
-          position: "bottom-right",
+          data = data.filter((e) => e.status === "Active");
+          getProjects();
+          settask(data);
+          toast({
+            title: `Task Updated Successfully`,
+            variant: "top-accent",
+            status: "success",
+            isClosable: true,
+            position: "bottom-right",
+          });
+        })
+        .catch((e) => {
+          toast({
+            title: `Something went wrong`,
+            variant: "top-accent",
+            status: "error",
+            isClosable: true,
+            position: "bottom-right",
+          });
         });
-      });
     });
   };
 
   const handleStatus = (e) => {
     let type = e.target.value;
-    getTasksdata().then((res) => {
+    getTasksdata({ clientId: id[0] }).then((res) => {
       let data = res.data;
       data = data.filter((e) => e.status === type);
       settask(data);
     });
+    getProjects();
   };
   React.useEffect(() => {
-    getTasksdata().then((res) => {
+    getTasksdata({ clientId: id[0] }).then((res) => {
       let data = res.data;
 
       data = data.filter((e) => e.status === "Active");
 
       settask(data);
     });
+    getProjects();
   }, []);
 
+  async function handleProjectChange(pr) {
+    getTasksdata({ clientId: id[0] })
+      .then((res) => {
+        let data = res.data;
+        data = data.filter((e) => e.status === "Active");
+        if (pr.target.value === "all") {
+          settask(data);
+        } else {
+          data = data.filter((e) => e.project === pr.target.value);
+          settask(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
-    <Stack p="5%" pt="2%" spacing={8}>
+    <Stack p={["0", "1%", "5%", "5%"]} pt="2%" spacing={8}>
       <Box
         bg="#f2faff"
         border="1px solid #e2f3ff"
@@ -155,7 +197,11 @@ const Tasks = () => {
         </Flex>
       </Box>
 
-      <Flex justify="space-between" align="center">
+      <Flex
+        justify="space-between"
+        align="center"
+        flexDirection={["column", "column", "row", "row"]}
+      >
         <Flex gap={2}>
           <Select
             fontSize="13px"
@@ -191,12 +237,17 @@ const Tasks = () => {
             fontWeight="bold"
             focusBorderColor="none"
             borderRadius="0px"
+            onChange={handleProjectChange}
             _focus={{ border: "1px solid #48a791" }}
           >
-            <option>All Projects</option>
+            <option value="all">All Projects</option>
+            {project &&
+              project.map((e) => {
+                return <option value={e.name}>{e.name}</option>;
+              })}
           </Select>
         </Flex>
-        <Flex gap={2}>
+        <Flex gap={2} mt={["2%", "2%", "auto", "auto"]}>
           <Button
             fontSize="13px"
             fontWeight="bold"
@@ -294,11 +345,15 @@ const Tasks = () => {
                           fontSize: "15px",
                         }}
                         onChange={handleChange}
-                        name="duedate"
+                        name="project"
                         fontSize="13px"
                         border="none"
                       >
                         <option>PROJECT</option>
+                        {project &&
+                          project.map((e) => {
+                            return <option>{e.name}</option>;
+                          })}
                       </Select>
                     </Flex>
                     <Flex>
@@ -367,6 +422,7 @@ const Tasks = () => {
                       handleDelete={handleDelete}
                       handlePatch={handlePatch}
                       handleAdd={handleAdd}
+                      // project={project}
                       key={e._id}
                     />
                   );

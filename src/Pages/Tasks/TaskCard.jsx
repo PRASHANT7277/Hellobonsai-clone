@@ -252,11 +252,12 @@ const TaskCard = (e) => {
                   />
                 </Box>
                 <Flex justify="space-between" align="center" gap={5}>
-                  <Flex align="center">
+                  <Flex align="center" gap={2}>
                     <Text color="#a292a2" fontSize="15px">
                       <BsFolder2 />
                     </Text>
-                    <Select
+                    <Text>Project - {e.project}</Text>
+                    {/* <Select
                       _placeholder={{
                         color: "#aaa",
                         fontWeight: "normal",
@@ -267,8 +268,8 @@ const TaskCard = (e) => {
                       fontSize="13px"
                       border="none"
                     >
-                      <option>PROJECT</option>
-                    </Select>
+                      <option>{e.project}</option>
+                    </Select> */}
                   </Flex>
                   <Flex>
                     <Input

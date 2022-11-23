@@ -17,9 +17,12 @@ import "./Dashboard.module.css";
 import ProjectTimeline from "./ProjectTimeline";
 import IncomeExp from "./IncomeExp";
 import Tasks from "./Task";
+import { getTasksdata } from "../../Redux/TaskReducer.jsx/Task.action";
 const Dashboard = () => {
   let [name, setname] = useState("XYZ");
   const [showdetail, setshowdetail] = useState(true);
+  const [projects, setproject] = useState([]);
+  const [tasks, settasks] = useState([]);
   let token = localStorage.getItem("token");
   let id = token.split(":");
 
@@ -36,6 +39,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     userDetail();
+    getTasksdata({ clientId: id[0] }).then((res) => {
+      let data = res.data;
+
+      data = data.filter((e) => e.status === "Active");
+
+      settasks(data);
+    });
+    getProjects();
   }, []);
 
   const weekday = [
@@ -80,9 +91,17 @@ const Dashboard = () => {
   let greet =
     hrs < 12
       ? "Good morning"
-      : hrs > 12 && hrs < 17
+      : hrs >= 12 && hrs < 17
       ? "Good afternoon"
       : "Good evening";
+
+  async function getProjects() {
+    await axios
+      .get(`https://hellobonsaibackend.herokuapp.com/projects/userId/${id[0]}`)
+      .then((res) => {
+        setproject(res.data);
+      });
+  }
 
   return (
     <div>
@@ -260,8 +279,8 @@ const Dashboard = () => {
         </Flex>
         <Flex gap={12}>
           <Stack w="80%" spacing={9}>
-            <ProjectTimeline />
-            <Tasks />
+            <ProjectTimeline projects={projects} />
+            <Tasks tasks={tasks} projects={projects} />
             <IncomeExp />
           </Stack>
           <Stack>
