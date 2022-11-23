@@ -16,13 +16,13 @@ const ProjectTimeline = ({ projects }) => {
         h="150px"
         p={5}
       >
-        {!projects && (
+        {projects.length === 0 && (
           <Text m="auto" color="#aaa">
             No Currunt Activity in Time frame
           </Text>
         )}
 
-        {projects && (
+        {projects.length > 0 && (
           <>
             <Flex align="center" justify="space-between" fontWeight="bold">
               <Text>Name</Text>

@@ -1,5 +1,6 @@
 import {
-  Flex,Box,
+  Flex,
+  Box,
   Grid,
   GridItem,
   Heading,
@@ -10,9 +11,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import './pone.css'
+import "./pone.css";
 
-const  Pone= () => {
+const Pone = () => {
   return (
     <Box>
       <Box className="first2"></Box>
@@ -114,7 +115,7 @@ const  Pone= () => {
         <GridItem area={"image"}>
           <Image
             w={{
-              sm: " 557px"
+              sm: " 557px",
             }}
             src={`https://assets-global.website-files.com/58868bcd2ef4daaf0f072900/60dc499268d597166db997aa_bonsai_hero-opt-2.png`}
           />

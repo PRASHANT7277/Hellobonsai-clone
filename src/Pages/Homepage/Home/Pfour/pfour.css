@@ -1,5 +1,5 @@
 .first1 {
-  left: 750px;
+  left: 690px;
 
   width: 40vw;
   height: 50vw;
@@ -11,17 +11,16 @@
   display: block;
 
   border-radius: 6.6vw;
-  background-color: #FFF5E8;
+  background-color: #fff5e8;
 
   transform: rotate(-23deg);
 }
 @media screen and (max-width: 913px) {
- .first1{ right: 0px;
- width: 0vw;
-  height: 0vw;
-  position: absolute;
-  top: 0px;
-  
- }
-
+  .first1 {
+    right: 0px;
+    width: 0vw;
+    height: 0vw;
+    position: absolute;
+    top: 0px;
+  }
 }

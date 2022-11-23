@@ -36,12 +36,12 @@ const Tasks = ({ tasks, projects }) => {
       </Flex>
       <Divider />
       <Stack textAlign="center" h="150px" p={5}>
-        {!tasks && (
+        {tasks.length === 0 && (
           <Text m="auto" color="#aaa">
             No Task yet
           </Text>
         )}
-        {tasks && (
+        {tasks.length > 0 && (
           <>
             <Flex align="center" justify="space-between" fontWeight="bold">
               <Text>Title</Text>
