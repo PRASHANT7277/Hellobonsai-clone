@@ -1,6 +1,7 @@
 import React from "react";
-import { Stack, Box, Text, Divider } from "@chakra-ui/react";
-const ProjectTimeline = () => {
+import { Stack, Box, Text, Divider, Flex } from "@chakra-ui/react";
+import Clients from "../../../Pages/Clients/Clients";
+const ProjectTimeline = ({ projects }) => {
   return (
     <Stack border="1px solid #d5d6d6" borderRadius="5px" fontSize="14px">
       <Text color="#292a2d" p={4} fontWeight="bold">
@@ -13,10 +14,30 @@ const ProjectTimeline = () => {
         backgroundSize="cover"
         textAlign="center"
         h="150px"
+        p={5}
       >
-        <Text m="auto" color="#aaa">
-          No Currunt Activity in Time frame
-        </Text>
+        {projects.length === 0 && (
+          <Text m="auto" color="#aaa">
+            No Currunt Activity in Time frame
+          </Text>
+        )}
+
+        {projects.length > 0 && (
+          <>
+            <Flex align="center" justify="space-between" fontWeight="bold">
+              <Text>Name</Text>
+              <Text>From</Text>
+            </Flex>
+            {projects.map((e) => {
+              return (
+                <Flex align="center" justify="space-between">
+                  <Text>{e.name}</Text>
+                  <Text>{e.startDate}</Text>
+                </Flex>
+              );
+            })}
+          </>
+        )}
       </Stack>
     </Stack>
   );

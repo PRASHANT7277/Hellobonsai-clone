@@ -9,14 +9,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React from "react";
-import Pone from '../Home/Pone/pone'
-import Ptwo from '../Home/Ptwo/ptwo'
+import Pone from "../Home/Pone/pone";
+import Ptwo from "../Home/Ptwo/ptwo";
 import Pthree from "../Home/Pthree/pthree";
 import Pfour from "../Home/Pfour/pfour";
 import Pfive from "../Home/Pfive/pfive";
 const Home = () => {
-  
-
   return (
     <Box
       mt={{
@@ -62,8 +60,8 @@ const Home = () => {
           }}
           fontWeight={{ sm: 300, base: 300 }}
           color={"#4c525a"}
-          w={{ sm: "56%",lg:"40%" }}
-          textAlign='centre'
+          w={{ sm: "56%", lg: "40%" }}
+          textAlign="centre"
         >
           Bonsai integrates and automates every step of your business so it runs
           seamlessly - from proposal to tax season.
@@ -127,7 +125,16 @@ const Home = () => {
         </Heading>
       </VStack>
       <Pfour />
-      <Text textAlign={'center'} fontSize='30px' fontWeight={'semibold'} mb='50px' color={'grey'} fontFamily='Amerigo-bt roman opt,sans-serif' >Don't just take it from us.</Text>
+      <Text
+        textAlign={"center"}
+        fontSize="30px"
+        fontWeight={"semibold"}
+        mb="50px"
+        color={"grey"}
+        fontFamily="Amerigo-bt roman opt,sans-serif"
+      >
+        Don't just take it from us.
+      </Text>
       <Spacer />
       <Pfive />
 
@@ -153,7 +160,6 @@ const Home = () => {
           w={{
             sm: "70%",
             lg: "50%",
-            
           }}
         >
           <Heading
@@ -205,7 +211,7 @@ const Home = () => {
             mt={{ base: "20px" }}
             mr={{ sm: "20px" }}
           >
-           START FREE
+            START FREE
           </Button>
         </Link>
       </Flex>

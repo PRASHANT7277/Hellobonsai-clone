@@ -8,6 +8,16 @@ import {
   Link,
   Text,
   SimpleGrid,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
+  Show,
+  Hide,
 } from "@chakra-ui/react";
 import { IoIosAdd } from "react-icons/io";
 import { AiOutlineHome, AiFillGift } from "react-icons/ai";

@@ -24,6 +24,7 @@ import {
   Thead,
   Tr,
   useDisclosure,
+  Stack
 } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
@@ -40,6 +41,7 @@ import countryData from "./db.json";
 import axios from "axios";
 import GetClientName from "./GetClientName";
 
+import { FiAlertCircle } from "react-icons/fi";
 function Projects() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [country, setCountry] = useState([]);
@@ -133,35 +135,25 @@ function Projects() {
   }, [clientData]);
 
   return (
-    <div style={{ marginTop: "30px", marginBottom: "100px" }}>
+    <Stack p={["0", "1%", "5%", "5%"]} pt="2%" spacing={8}>
       <Box
-        borderLeft="2px solid #3a88c2"
-        w={["90%"]}
-        m="auto"
-        p={[5]}
-        backgroundColor="#f2faff"
-        borderRadius="5px"
+        bg="#f2faff"
+        border="1px solid #e2f3ff"
+        borderLeft="5px solid #e2f3ff"
+        p={4}
       >
-        <Flex justifyContent="left" gap="10px">
+        <Flex gap={2} align="top">
+          <FiAlertCircle color="#3a88c2" fontSize="20px" fontWeight="normal" />
           <Box>
-            <FaInfoCircle
-              style={{ marginTop: "7px", color: "#3a88c2" }}
-              size="20px"
-            />
-          </Box>
-
-          <Box>
-            <Text color="#3a88c2">Start 7 Day Free Trial</Text>
-            <Text display="flex" gap={1}>
-              You currently don't have an active subscription.{" "}
-              <Text
-                color="#3a88c2"
-                textDecoration="underline"
-                cursor={"pointer"}
-              >
-                Start your Free Trial now!
-              </Text>
+            <Text fontSize="14px" color="#3a88c2">
+              Start 7 Day Free Trial
             </Text>
+            <Flex fontSize="12px">
+              <Text>You currently don’t have an active subscription.</Text>
+              <Link color="#3a88c2" textDecoration="underline">
+                Start Your Free Trial now!
+              </Link>
+            </Flex>
           </Box>
         </Flex>
       </Box>
@@ -350,7 +342,7 @@ function Projects() {
           </Table>
         </TableContainer>
       </Box>
-    </div>
+    </Stack>
   );
 }
 

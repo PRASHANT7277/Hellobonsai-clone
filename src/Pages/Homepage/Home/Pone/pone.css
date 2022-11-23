@@ -1,29 +1,26 @@
 .first2 {
-    
-    left: 285px;
-   
-    width: 60vw;
-    height: 120vw;
-    position: absolute;
-   top:-1100px;
-    bottom: auto;
-    
-    z-index: -1;
-   display:block;
-   
-    
-    border-radius: 6.6vw;
-    background-color: #f2faff;
-    
-    transform: rotate(-22deg);
+  left: 250px;
+
+  width: 60vw;
+  height: 120vw;
+  position: absolute;
+  top: -1100px;
+  bottom: auto;
+
+  z-index: -1;
+  display: block;
+
+  border-radius: 6.6vw;
+  background-color: #f2faff;
+
+  transform: rotate(-22deg);
 }
 @media screen and (max-width: 913px) {
- .first2{ right: 0px;
- width: 0vw;
-  height: 0vw;
-  position: absolute;
-  top: 0px;
-  
- }
-
+  .first2 {
+    right: 0px;
+    width: 0vw;
+    height: 0vw;
+    position: absolute;
+    top: 0px;
+  }
 }
