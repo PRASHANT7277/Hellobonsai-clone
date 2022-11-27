@@ -11,12 +11,12 @@ import axios from "axios";
 
 const getClients = (id) => {
   return axios
-    .get(`https://hellobonsaibackend.herokuapp.com/clients/${id}`)
+    .get(`https://backend-hello-bonsai.onrender.com/clients/${id}`)
     .then((res) => res.data);
 };
 const getUsers = () => {
   return axios
-    .get("https://hellobonsaibackend.herokuapp.com/users")
+    .get("https://backend-hello-bonsai.onrender.com/users")
     .then((res) => res.data);
 };
 
@@ -28,20 +28,20 @@ const Clients = () => {
   let navigate = useNavigate()
 
   const deleteclient = async(id)=>{
-    return await axios.delete(`https://hellobonsaibackend.herokuapp.com/clients/${id}`).then((res)=>{alert("delete successfully");navigate(0)}).catch((e)=>{alert("something went wrong. please try again.")});
+    return await axios.delete(`https://backend-hello-bonsai.onrender.com/clients/${id}`).then((res)=>{alert("delete successfully");navigate(0)}).catch((e)=>{alert("something went wrong. please try again.")});
 }
-  console.log(token);
+  // console.log(token);
   token = token.split(":");
   let id = token[0];
-  console.log(id);
+  // console.log(id);
   useEffect(() => {
     getClients(id).then((res) => {
-      console.log(res);
+      // console.log(res);
       setdata([...res]);
       return res;
     });
     getUsers().then((res) => {
-      console.log(res);
+      // console.log(res);
       setUserdata([...res]);
       return res;
     });

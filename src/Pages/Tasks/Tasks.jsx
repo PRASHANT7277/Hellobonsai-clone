@@ -64,7 +64,7 @@ const Tasks = () => {
 
   async function getProjects() {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/projects/userId/${id[0]}`)
+      .get(`https://backend-hello-bonsai.onrender.com/projects/userId/${id[0]}`)
       .then((res) => {
         setProject(res.data);
       });

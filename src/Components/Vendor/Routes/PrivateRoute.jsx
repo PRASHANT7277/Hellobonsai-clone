@@ -6,7 +6,7 @@ const PrivateRoute = ({ children }) => {
   if (!token) {
     navigate("/login");
   }
-  console.log(token);
+  // console.log(token);
   return children;
 };
 

@@ -7,6 +7,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import IndividualProject from "../../../Pages/Projects/IndividualProject";
 import Tasks from "../../../Pages/Tasks/Tasks";
 import { Clientdata } from "../../../Pages/Clients/Clientdata";
+import Setting from "../../../Pages/Setting";
 
 const VendorRoutes = () => {
   const params = useParams();
@@ -18,6 +19,7 @@ const VendorRoutes = () => {
       <Route path="/clients/:id" element={<Clientdata />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="tasks" element={<Tasks />} />
+      <Route path="/setting" element={<Setting />} />
       <Route path="/projects/:id" element={<IndividualProject />} />
     </Routes>
   );

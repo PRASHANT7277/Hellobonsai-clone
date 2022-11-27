@@ -17,7 +17,7 @@ function GetClientName({ id }) {
 
   const handleGetClient = async (id) => {
     return await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/clients/c/${id}`)
+      .get(`https://backend-hello-bonsai.onrender.com/clients/c/${id}`)
       .then((res) => res.data);
   };
 export default GetClientName

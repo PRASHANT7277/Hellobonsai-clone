@@ -29,7 +29,7 @@ function IndividualProject() {
 
   async function handleGetProject(id) {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/projects/${id}`)
+      .get(`https://backend-hello-bonsai.onrender.com/projects/${id}`)
       .then((res) => {
         setIndividual(res.data);
         setClientId(res.data.clientId);
@@ -39,7 +39,7 @@ function IndividualProject() {
 
   async function handleGetClient(id) {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/clients/c/${id}`)
+      .get(`https://backend-hello-bonsai.onrender.com/clients/c/${id}`)
       .then((res) => setClient(res.data));
     // .then((res)=> console.log(res.data.name))
   }
