@@ -17,7 +17,7 @@ import { LoginNavbar } from "./Login_navbar";
 import Axios from "axios";
 export const Login = () => {
   const navigate = useNavigate();
-  const url = "https://hellobonsaibackend.herokuapp.com/users/login";
+  const url = "https://backend-hello-bonsai.onrender.com/users/login";
   const [data, setData] = useState({
     email: "",
     password: "",

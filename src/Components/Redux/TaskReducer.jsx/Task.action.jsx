@@ -4,7 +4,7 @@ import axios from "axios";
 export const getTasksdata = async (clientId) => {
   try {
     let res = await axios.get(
-      "https://hellobonsaibackend.herokuapp.com/tasks",
+      "https://backend-hello-bonsai.onrender.com/tasks",
       {
         headers: {
           clientid: clientId.clientId,
@@ -21,7 +21,7 @@ export const getTasksdata = async (clientId) => {
 export const postTask = async (data) => {
   try {
     let res = await axios.post(
-      "https://hellobonsaibackend.herokuapp.com/tasks",
+      "https://backend-hello-bonsai.onrender.com/tasks",
       // { Cookie: token }
       data
     );
@@ -33,7 +33,7 @@ export const postTask = async (data) => {
 export const deleteTask = async (id) => {
   try {
     let res = await axios.delete(
-      `https://hellobonsaibackend.herokuapp.com/tasks/${id}`
+      `https://backend-hello-bonsai.onrender.com/tasks/${id}`
     );
     return res;
   } catch (e) {
@@ -44,7 +44,7 @@ export const deleteTask = async (id) => {
 export const updateTask = async (id, data) => {
   try {
     let res = await axios.patch(
-      `https://hellobonsaibackend.herokuapp.com/tasks/${id}`,
+      `https://backend-hello-bonsai.onrender.com/tasks/${id}`,
       data
     );
     return res;

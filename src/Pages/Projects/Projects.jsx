@@ -68,7 +68,7 @@ function Projects() {
   async function handleAddProject(e) {
     e.preventDefault();
 
-    await axios.post("https://hellobonsaibackend.herokuapp.com/projects", {
+    await axios.post("https://backend-hello-bonsai.onrender.com/projects", {
       userId: usersData,
       clientId: data.clientId,
       name: data.name,
@@ -81,7 +81,7 @@ function Projects() {
 
   async function getClient() {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/clients/${usersData}`)
+      .get(`https://backend-hello-bonsai.onrender.com/clients/${usersData}`)
       .then((res) => setClientData(res.data));
   }
 
@@ -89,7 +89,7 @@ function Projects() {
     setLoading(true);
     await axios
       .get(
-        `https://hellobonsaibackend.herokuapp.com/projects/userId/${usersData}`
+        `https://backend-hello-bonsai.onrender.com/projects/userId/${usersData}`
       )
       .then((res) => {
         setProject(res.data);
@@ -105,13 +105,13 @@ function Projects() {
 
   async function handleDeleteProject(id) {
     await axios
-      .delete(`https://hellobonsaibackend.herokuapp.com/projects/${id}`)
+      .delete(`https://backend-hello-bonsai.onrender.com/projects/${id}`)
       .then(() => getProjects());
   }
 
   async function toggleStatus(id, status) {
     await axios.patch(
-      `https://hellobonsaibackend.herokuapp.com/projects/${id}`,
+      `https://backend-hello-bonsai.onrender.com/projects/${id}`,
       {
         status: !status,
       }

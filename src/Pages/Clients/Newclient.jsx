@@ -31,7 +31,7 @@ export const Newclient = ({user}) => {
       }
       let a= await axios({
         method: 'post',
-        url: 'https://hellobonsaibackend.herokuapp.com/clients',
+        url: 'https://backend-hello-bonsai.onrender.com/clients',
         data: data
       });
       if(a.status===200){

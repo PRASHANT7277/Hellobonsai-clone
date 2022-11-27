@@ -1,0 +1,50 @@
+.main{
+    margin: 5px;
+    padding: 5px;
+
+}
+.header1{
+    width: 80%;
+    margin: auto;
+}
+.line5{
+    padding: 5px;
+    border-bottom: 3px solid rgb(214, 214, 214);
+}
+.mainForm{
+    width: 80%;
+    margin: auto;
+}
+.inputForm{
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
+    width: 80%;
+    font-size: 20px;
+    padding: 5px;
+    outline: none;
+}
+.deleteSec{
+    width:80%;
+    margin: auto;
+}
+.missYou{
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+.passwordForm{
+    width: 80%;
+    margin: auto;
+}
+.passwordForm>p{
+    font-size: 18px;
+    font-weight: 500;
+}
+.passwordForm>input{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-size: 18px;
+    padding: 5px;
+    width: 100%;
+}

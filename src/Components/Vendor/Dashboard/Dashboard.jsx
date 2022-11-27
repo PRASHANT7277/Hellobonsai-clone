@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const userDetail = async () => {
     axios
-      .get(`https://hellobonsaibackend.herokuapp.com/users/${id[0]}`)
+      .get(`https://backend-hello-bonsai.onrender.com/users/${id[0]}`)
       .then((res) => {
         setname(res.data.user.name);
       })
@@ -97,7 +97,7 @@ const Dashboard = () => {
 
   async function getProjects() {
     await axios
-      .get(`https://hellobonsaibackend.herokuapp.com/projects/userId/${id[0]}`)
+      .get(`https://backend-hello-bonsai.onrender.com/projects/userId/${id[0]}`)
       .then((res) => {
         setproject(res.data);
       });

@@ -3,15 +3,15 @@ import { SettingsIcon } from '@chakra-ui/icons';
 import { Grid, GridItem, Heading } from '@chakra-ui/layout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from "./Clientdata.module.css";
 import Tab from './Tab';
 
 const getclient = async (id)=>{
-    return await axios.get(`https://hellobonsaibackend.herokuapp.com/clients/c/${id}`).then((res)=>res.data);
+    return await axios.get(`https://backend-hello-bonsai.onrender.com/clients/c/${id}`).then((res)=>res.data);
 }
 const getProjects = async (id)=>{
-    return await axios.get(`https://hellobonsaibackend.herokuapp.com/projects/userId/${id}`).then((res)=>res.data);
+    return await axios.get(`https://backend-hello-bonsai.onrender.com/projects/userId/${id}`).then((res)=>res.data);
 }
 const Contact = ({c})=>{
     return(
@@ -88,7 +88,9 @@ export const Clientdata = () => {
                     <SettingsIcon />
                 </Button>
                 <Button colorScheme='green' variant='outline'>
+                    <Link to="/vendor/projects">
                     Create New Project
+                    </Link>
                 </Button>
             </div>
                 </GridItem>

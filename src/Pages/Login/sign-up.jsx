@@ -28,7 +28,7 @@ import Axios from "axios";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const url = "https://hellobonsaibackend.herokuapp.com/users/signUp";
+  const url = "https://backend-hello-bonsai.onrender.com/users/signUp";
   const [data, setData] = useState({
     email: "",
     name: "",
