@@ -24,18 +24,12 @@ import {
   Thead,
   Tr,
   useDisclosure,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  FaChevronDown,
-  FaEllipsisH,
-  FaFolder,
-  FaInfoCircle,
-  FaSearch,
-} from "react-icons/fa";
+import { FaChevronDown, FaEllipsisH, FaFolder, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import countryData from "./db.json";
 import axios from "axios";
@@ -48,8 +42,6 @@ function Projects() {
   const [clientData, setClientData] = useState([]);
   const [usersData, setUsersData] = useState("");
   const [project, setProject] = useState([]);
-  const [client, setClient] = useState({});
-  const [clientId, setClientId] = useState("");
   const [loading, setLoading] = useState(false);
 
   let arr = new Date().toDateString();
@@ -68,14 +60,17 @@ function Projects() {
   async function handleAddProject(e) {
     e.preventDefault();
 
-    await axios.post("https://backend-hello-bonsai.onrender.com/projects", {
-      userId: usersData,
-      clientId: data.clientId,
-      name: data.name,
-      currency: data.currency,
-      startDate: data.startDate,
-      status: data.status,
-    });
+    await axios
+      .post("https://backend-hello-bonsai.onrender.com/projects", {
+        userId: usersData,
+        clientId: data.clientId,
+        name: data.name,
+        currency: data.currency,
+        startDate: data.startDate,
+        status: data.status,
+      })
+      .then(() => alert("Project Added!😊"))
+      .catch((e) => alert("Project not Added! try again☹️"));
     getProjects();
   }
 
@@ -141,6 +136,7 @@ function Projects() {
         border="1px solid #e2f3ff"
         borderLeft="5px solid #e2f3ff"
         p={4}
+        mt={-10}
       >
         <Flex gap={2} align="top">
           <FiAlertCircle color="#3a88c2" fontSize="20px" fontWeight="normal" />
@@ -148,11 +144,11 @@ function Projects() {
             <Text fontSize="14px" color="#3a88c2">
               Start 7 Day Free Trial
             </Text>
-            <Flex fontSize="12px">
+            <Flex fontSize="12px" gap="2px">
               <Text>You currently don’t have an active subscription.</Text>
-              <Link color="#3a88c2" textDecoration="underline">
+              <Text color="#3a88c2" textDecor="underline">
                 Start Your Free Trial now!
-              </Link>
+              </Text>
             </Flex>
           </Box>
         </Flex>
@@ -208,6 +204,7 @@ function Projects() {
                     id="clientId"
                     value={data.clientId}
                     onChange={handleData}
+                    required
                   >
                     {/* <option value="Sample Client">Sample Client</option> */}
                     {clientData?.map((el) => (
@@ -227,6 +224,7 @@ function Projects() {
                     id="name"
                     value={data.name}
                     onChange={handleData}
+                    required
                   />
                   <br />
                   <br />
@@ -241,6 +239,7 @@ function Projects() {
                     id="currency"
                     value={data.currency}
                     onChange={handleData}
+                    required
                   >
                     {country?.map((el) => (
                       <option key={el.name} value={el.name}>
@@ -266,81 +265,106 @@ function Projects() {
       </Box>
 
       <Box w={["90%"]} m="auto" mt={10}>
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>TITLE</Th>
-                <Th>CLIENT</Th>
-                <Th>START DATE</Th>
-                <Th>DUE</Th>
-                <Th>PAID</Th>
-                <Th></Th>
-              </Tr>
-            </Thead>
-
-            {loading ? (
-              <Tbody>
-                <Tr>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td>
-                    <Flex alignItems="center" gap={2}>
-                      ...Loading
-                      <Spinner color="#00b289" size="sm" thickness="3px" />
-                    </Flex>
-                  </Td>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td></Td>
-                </Tr>
-              </Tbody>
+        {loading ? (
+          <Text
+            w="20%"
+            m="auto"
+            mt={20}
+            display="flex"
+            gap="5px"
+            alignItems={"center"}
+          >
+            Loading
+            <Spinner color="#00a881" size="md" thickness="4px" />
+          </Text>
+        ) : (
+          <>
+            {project.length === 0 ? (
+              <Text w="200px" m="auto" mt={10}>
+                No Projects Added Yet!
+              </Text>
             ) : (
-              <Tbody>
-                {project?.map((el) => (
-                  <Tr key={el._id}>
-                    <Td fontWeight={500}>
-                      <Link to={`/vendor/projects/${el._id}`}>
-                        <Flex alignItems="center" gap={2}>
-                          <FaFolder />
-                          <Text>{el.name}</Text>
-                        </Flex>
-                      </Link>
-                    </Td>
-                    <Td color="grey">
-                      <GetClientName id={el.clientId} />
-                    </Td>
-                    <Td>{el.startDate}</Td>
-                    <Td color="grey">₹0.00</Td>
-                    <Td color="grey">₹0.00</Td>
-                    <Td>
-                      <Menu>
-                        <MenuButton as={Button} bg="white">
-                          <FaEllipsisH color="grey" />
-                        </MenuButton>
-                        <MenuList>
+              <TableContainer>
+                <Table variant="simple">
+                  <Thead>
+                    <Tr>
+                      <Th>TITLE</Th>
+                      <Th>CLIENT</Th>
+                      <Th>START DATE</Th>
+                      <Th>DUE</Th>
+                      <Th>PAID</Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+
+                  <Tbody>
+                    {project?.map((el) => (
+                      <Tr key={el._id}>
+                        <Td fontWeight={500}>
                           <Link to={`/vendor/projects/${el._id}`}>
-                            <MenuItem>View Project</MenuItem>
+                            <Flex alignItems="center" gap={2}>
+                              {el.status ? (
+                                <Box
+                                  w="10px"
+                                  h="10px"
+                                  borderRadius={"50%"}
+                                  bgColor="green"
+                                ></Box>
+                              ) : (
+                                <Box
+                                  w="10px"
+                                  h="10px"
+                                  borderRadius={"50%"}
+                                  bgColor="gray.300"
+                                ></Box>
+                              )}
+                              <FaFolder />
+                              <Text>{el.name}</Text>
+                            </Flex>
                           </Link>
-                          <MenuItem
-                            onClick={() => toggleStatus(el._id, el.status)}
-                          >
-                            {el.status
-                              ? "Mark Uncompleted"
-                              : "Mark as Completed"}
-                          </MenuItem>
-                          <MenuItem onClick={() => handleDeleteProject(el._id)}>
-                            Delete Project
-                          </MenuItem>
-                        </MenuList>
-                      </Menu>
-                    </Td>
-                  </Tr>
-                ))}
-              </Tbody>
+                        </Td>
+                        <Td>
+                          <GetClientName id={el.clientId} />
+                        </Td>
+                        <Td>{el.startDate}</Td>
+                        <Td color="gray.300">₹0.00</Td>
+                        <Td color="gray.300">₹0.00</Td>
+                        <Td>
+                          <Menu>
+                            <MenuButton as={Button} bg="white">
+                              <FaEllipsisH color="grey" />
+                            </MenuButton>
+                            <MenuList>
+                              <Link to={`/vendor/projects/${el._id}`}>
+                                <MenuItem _hover={{ color: "#00CF9F" }}>
+                                  View Project
+                                </MenuItem>
+                              </Link>
+                              <MenuItem
+                                onClick={() => toggleStatus(el._id, el.status)}
+                                _hover={{ color: "#00CF9F" }}
+                              >
+                                {el.status
+                                  ? "Mark Uncompleted"
+                                  : "Mark as Completed"}
+                              </MenuItem>
+                              <MenuItem
+                                _hover={{ color: "#00CF9F" }}
+                                onClick={() => handleDeleteProject(el._id)}
+                              >
+                                Delete Project
+                              </MenuItem>
+                            </MenuList>
+                          </Menu>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
             )}
-          </Table>
-        </TableContainer>
+          </>
+        )}
       </Box>
     </Stack>
   );

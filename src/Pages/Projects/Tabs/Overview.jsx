@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   SimpleGrid,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { FaCircle, FaInfoCircle } from "react-icons/fa";
@@ -142,9 +142,7 @@ function Overview({ title }) {
             Your Notes
           </Text>
           <Button>
-            <Text fontSize="xs">
-              Edit
-            </Text>
+            <Text fontSize="xs">Edit</Text>
           </Button>
         </Flex>
         <hr />

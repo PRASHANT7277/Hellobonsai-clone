@@ -48,10 +48,16 @@ function TimeTracking() {
         </Text>
       </Box>
 
-      <Box border="1px solid #bfc0c4" w={["75%"]} p={[5]} borderRadius="10px" mt={10}>
-          <Text display="flex" alignItems="center" gap={1} fontWeight={500}>
-            Timesheets
-          </Text>
+      <Box
+        border="1px solid #bfc0c4"
+        w={["75%"]}
+        p={[5]}
+        borderRadius="10px"
+        mt={10}
+      >
+        <Text display="flex" alignItems="center" gap={1} fontWeight={500}>
+          Timesheets
+        </Text>
         <hr />
         <Text align="center" mt={5} color="grey">
           No timesheets have been invoiced yet.

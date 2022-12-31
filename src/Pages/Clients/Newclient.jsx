@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from "./Clients.module.css";
 
 import { Modal,
@@ -45,7 +45,10 @@ export const Newclient = ({user}) => {
       }
     }
   return (
-    <div className={styles.nclient} onClick={onOpen}>Newclient
+    <div className={styles.nclient} onClick={onOpen}>
+      
+      
+      Newclient
 
 
         <Modal isOpen={isOpen} onClose={onClose}>

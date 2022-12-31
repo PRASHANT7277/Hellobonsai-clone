@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 function Invoices() {
@@ -22,11 +17,11 @@ function Invoices() {
         </Flex>
         <hr />
         <Text align="center" mt={5} color="grey">
-         No invoices for this project yet.
+          No invoices for this project yet.
         </Text>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default Invoices
+export default Invoices;

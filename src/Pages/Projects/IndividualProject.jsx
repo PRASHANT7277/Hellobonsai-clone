@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   Heading,
+  Skeleton,
   Tab,
   TabList,
   TabPanel,
@@ -26,21 +27,26 @@ function IndividualProject() {
   const [individual, setIndividual] = useState({});
   const [client, setClient] = useState({});
   const [clientId, setClientId] = useState("");
+  const [l, setL] = useState(false);
 
   async function handleGetProject(id) {
+    setL(true);
     await axios
       .get(`https://backend-hello-bonsai.onrender.com/projects/${id}`)
       .then((res) => {
+        setL(false);
         setIndividual(res.data);
         setClientId(res.data.clientId);
       });
     // .then((res)=> console.log(res.data))
   }
-
+  // console.log(individual);
   async function handleGetClient(id) {
     await axios
       .get(`https://backend-hello-bonsai.onrender.com/clients/c/${id}`)
-      .then((res) => setClient(res.data));
+      .then((res) => {
+        setClient(res.data);
+      });
     // .then((res)=> console.log(res.data.name))
   }
   handleGetClient(clientId);
@@ -52,7 +58,9 @@ function IndividualProject() {
   return (
     <Box w={["95%"]} m="auto" p={[10]}>
       <Box p={5}>
-        <Heading fontWeight={500}>{individual.name}</Heading>
+        <Heading fontWeight={500}>
+          {l ? <Skeleton height={"40px"} w="20%" /> : individual.name}
+        </Heading>
 
         <Flex gap={5} mt={[3]}>
           <Text display="flex" alignItems="center" gap={2} color="grey">
@@ -89,7 +97,7 @@ function IndividualProject() {
             <Collaborators />
           </TabPanel>
           <TabPanel>
-            <Settings title={individual.name} />
+            <Settings id={individual._id} title={individual.name} />
           </TabPanel>
         </TabPanels>
       </Tabs>
